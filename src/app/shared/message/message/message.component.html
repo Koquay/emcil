@@ -1,0 +1,15 @@
+<div class="container-fluid my-4"  *ngIf="alert">
+    <div class="row py-2" 
+      [ngClass]="{'alertDangerClass' : alert.type=='danger', 
+        'alertInfoClass' : alert.type=='info',
+        'alertSuccessClass' : alert.type=='success'}">
+        <div class="col text-center d-flex justify-content-center align-items-center">
+            <h4 class="text-center font-weight-bold m-0 d-inline-block">
+              {{alert.text}}
+            </h4>
+            <a class="ml-4" (click)="removeAlert()">
+              <i class="fa fa-remove d-inline-block"></i>
+            </a>
+          </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+// $primary: #b0bec5; 
+// $secondary: #808e95;
+// $tertiary: #e2f1f8;
+
+$primary: #0277bd; 
+$secondary: #004c8c;
+$tertiary: #58a5f0;
+
+// $primary: #82b1ff; 
+// $secondary: #4d82cb;
+// $tertiary: #b6e3ff;
+
+header {
+    .fa-bars {
+        color: white;
+    }
+
+    .fa-phone {
+        font-size: 1.5rem;
+    }
+        
+    
+    .category { 
+        &:hover {
+            .categories {
+                visibility: visible;
+                transition: .5s;
+            }
+        }
+    }
+    
+    .categories {
+        background: white;
+        padding: 1rem 2rem;
+        font-weight: bold;
+        position: fixed;
+        z-index: 10;
+        min-width: 15rem;
+        margin-top: -0.5rem;
+    // padding: 1rem;
+        
+        a {
+            color: $secondary !important;   
+            
+            &:hover {
+                color: $primary !important;   
+            }
+        }        
+                
+    }
+}
+
+.navbar {
+    background: $secondary;
+    color: white;
+    
+    a {
+        color: white !important;
+    }
+}
+
+.jumbotron {
+    background: $primary;
+    color: white;
+    padding: 1rem;    
+    
+    h1 {
+        font-family: 'Roboto';
+        font-weight: 700;
+        color: $secondary; 
+        font-size: 2rem;
+    }   
+    
+    p {        
+        color: $secondary; 
+        font-size: 1.2rem;
+    }
+    
+    #business-name {
+        font-style: italic;
+        font-size: 2rem;
+        color: white;                 
+    }
+    
+    @media(min-width: 768px) {
+        #business-name {
+            font-size: 3rem;
+        }    
+        
+        p {
+            font-size: 1.5rem;
+        }
+    }
+}

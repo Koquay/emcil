@@ -1,0 +1,41 @@
+// $primary: #b0bec5; 
+// $secondary: #808e95;
+// $tertiary: #e2f1f8;
+
+$primary: #0277bd; 
+$secondary: #004c8c;
+$tertiary: #58a5f0;
+
+// $primary: #82b1ff; 
+// $secondary: #4d82cb;
+// $tertiary: #b6e3ff;
+
+
+
+#main-container {
+    // margin-top: 3rem;
+    
+    #categories {
+        margin-top: 3rem;
+        
+        .card {
+            position: relative;
+            
+            div {
+                position:absolute;
+                bottom: 2rem;
+                // left: 10%;
+                h2 {
+                    font-weight: bold;
+                    color: $secondary;
+                }
+            }
+        }
+    } 
+}
+
+
+
+
+
+

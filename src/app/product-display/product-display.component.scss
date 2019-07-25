@@ -1,0 +1,40 @@
+// $primary: #b0bec5; 
+// $secondary: #808e95;
+// $tertiary: #e2f1f8;
+
+// $primary: #0277bd; 
+// $secondary: #004c8c;
+// $tertiary: #58a5f0;
+
+$primary: #82b1ff; 
+$secondary: #4d82cb;
+$tertiary: #b6e3ff;
+
+#main-container {
+    #price {
+        font-size: 1.2rem;
+    }
+    
+    #size {
+        button {
+            font-size: .8rem;
+            background: $primary;
+            margin-right: .5rem;
+            width: 2.6rem;
+            border-radius: 0;
+        }
+    }
+    
+    #add-to-bag {
+        button {
+            background: $secondary;
+            // border-radius: 0;
+            font-weight: bold;
+        }
+    }
+    
+    #complete-look {
+        .card {
+        }
+    }
+}

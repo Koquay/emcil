@@ -1,0 +1,112 @@
+<app-header></app-header>
+<app-message></app-message>
+<div class="container top-spacing" id="main-container">
+    <section>
+        <app-page-header [productType]="productType"></app-page-header>
+
+        <div class="row">
+            <div class="col-12 col-lg-1 order-1 order-lg-0">
+                <div class="row d-flex justify-content-center mt-4 mt-lg-0">
+                    <div class="col-3 col-lg-12 mb-4" *ngFor="let image of product.images">
+                        <div class="card">
+                            <a (click)="setDisplayImage(image)">
+                                <img class="img-fluid" src="assets/img/{{image}}">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 order-0 order-lg-1">
+                <div class="card">
+                    <img class="img-fluid" src="assets/img/{{displayImage}}">
+                </div>
+            </div>
+            <div class="col-12 col-lg-5 order-2">
+                <h4 class="font-weight-bold">{{product.name}}</h4>
+                <div id="list_price">
+                    <span class="strike-through font-weight-bold">
+                        Was: {{product.list_price | currency:'USD':'symbol-narrow'}}
+                    </span>
+                </div>
+                <div id="price">
+                    <span class="red font-weight-bold">
+                        Sale: {{product.price | currency:'USD':'symbol-narrow'}}
+                    </span>
+                </div>
+                <div id="size" class="mt-2">
+                    <h5 class="mb-1 font-weight-bold">Select size:</h5>
+                    <p class="mb-2">Sizes: XS (2), S (4-6), M (8-10), L (12-14), XL (16)<br></p>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-primary" type="button" (click)="setSize('XS')">XS</button>
+                        <button class="btn btn-primary" type="button" (click)="setSize('S')">S</button>
+                        <button class="btn btn-primary" type="button" (click)="setSize('M')">M</button>
+                        <button class="btn btn-primary" type="button" (click)="setSize('L')">L</button>
+                        <button class="btn btn-primary" type="button" (click)="setSize('XL')">XL</button>
+                    </div>
+                </div>
+                <div id="add-to-bag" class="mt-4">
+                    <button class="btn btn-primary" type="button" (click)="addToCart()">
+                        <i class="fa fa-cart-arrow-down mr-2"></i>
+                        <strong>ADD TO SHOPPING CART</strong>
+                    </button>
+                </div>
+                <div id="description" class="mt-4">
+                    <h5 class="font-weight-bold">Description</h5>
+                    <p>{{product.description}}</p>
+                    <!-- <ul class="pl-3">
+                        <li>Sizes: XS (2), S (4-6), M (8-10), L (12-14), XL (16)</li>
+                        <li>Off the shoulder styling with elastic at top edge</li>
+                        <li>Tie detail at sleeve openings</li>
+                        <li>Hits above the knee 37"</li>
+                    </ul> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="complete-look" class="mt-5">
+        <div class="row">
+            <div class="col text-center">
+                <h4>COMPLETE THE LOOK</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 col-lg-2">
+                <div class="card"><img class="img-fluid card-img-top w-100 d-block" src="assets/img/18340142.jpg">
+                    <div class="card-body text-center">
+                        <h6 class="card-title">Dianne Breeze</h6><span>$59</span></div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="card"><img class="img-fluid card-img-top w-100 d-block" src="assets/img/18340148.jpg">
+                    <div class="card-body text-center">
+                        <h6 class="card-title">Dianne Breeze</h6><span>$59</span></div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="card"><img class="img-fluid card-img-top w-100 d-block" src="assets/img/18340161.jpg">
+                    <div class="card-body text-center">
+                        <h6 class="card-title">Dianne Breeze</h6><span>$59</span></div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="card"><img class="img-fluid card-img-top w-100 d-block" src="assets/img/18340168.jpg">
+                    <div class="card-body text-center">
+                        <h6 class="card-title">Dianne Breeze</h6><span>$59</span></div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="card"><img class="img-fluid card-img-top w-100 d-block" src="assets/img/18340227.jpg">
+                    <div class="card-body text-center">
+                        <h6 class="card-title">Dianne Breeze</h6><span>$59</span></div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2">
+                <div class="card"><img class="img-fluid card-img-top w-100 d-block" src="assets/img/18340142.jpg">
+                    <div class="card-body text-center">
+                        <h6 class="card-title">Dianne Breeze</h6><span>$59</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<app-footer></app-footer>

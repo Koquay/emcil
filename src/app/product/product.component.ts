@@ -1,0 +1,33 @@
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from './product.service';
+import { ActivatedRoute } from '@angular/router';
+import { Product } from '../shared/models/data-model';
+
+@Component({
+  selector: 'app-product',
+  templateUrl: './product.component.html',
+  styleUrls: ['./product.component.scss']
+})
+export class ProductComponent implements OnInit {
+  private products:Product[];
+  private productType;
+
+  constructor(
+    private productService:ProductService,
+    private activatedRoute:ActivatedRoute
+  ) { }
+
+  ngOnInit() {
+    this.getProductsByType();
+  }
+
+  private getProductsByType() {
+    let type = this.activatedRoute.snapshot.paramMap.get('product_type')
+    console.log('product_type', type)
+    this.productService.getProductsByType(type).subscribe(products => {
+      this.products = products;
+      this.productType = this.products[0].product_type;
+    })
+  }
+
+}

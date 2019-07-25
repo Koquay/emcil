@@ -1,0 +1,30 @@
+$primary: #a30000; 
+$secondary: #dd2c00;
+$tertiary: #ff6434;
+$gray: #f7f7f7;
+
+.row {
+    // background-color: #f2b8b8;
+    // color: red;
+}
+
+i {
+    font-size: 1.5rem;
+    color: black;
+    font-weight: bold;
+}
+
+.alertDangerClass {
+    background-color: #f2b8b8;
+    color: red;
+}
+
+.alertSuccessClass {
+    background-color: $tertiary;
+    color: blue;
+}
+
+.alertInfoClass {
+    background-color: #f2b8b8;
+    color: blue;
+}

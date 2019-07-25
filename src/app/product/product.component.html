@@ -1,0 +1,25 @@
+<app-header></app-header>
+<div class="container top-spacing">
+    <app-page-header [productType]="productType"></app-page-header>
+    <div class="row">
+        <div class="col-12 col-lg-3 col-md-4 mb-4" *ngFor="let product of products">
+            <a [routerLink]="['/product-display', product._id]">
+                <div class="card d-lg-flex">
+                    <img class="card-img-top w-100 d-block" src="assets/img/{{product.images[0]}}">
+                    <div class="card-body">
+                        <h6>{{product.name}}</h6>
+                        <div>
+                            <span class="mr-4 strike-through">
+                                {{product.list_price | currency:'USD':'symbol-narrow'}}
+                            </span>
+                            <span class="red">
+                                {{product.price | currency:'USD':'symbol-narrow'}}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -1,1 +1,107 @@
-/* You can add global styles to this file, and also import other style files */
+
+
+// $primary: #b0bec5; 
+// $secondary: #808e95;
+// $tertiary: #e2f1f8;
+// $red: #a30000; 
+
+// $primary: #0277bd; 
+// $secondary: #004c8c;
+// $tertiary: #58a5f0;
+$red: #a30000; 
+
+$primary: #82b1ff; 
+$secondary: #4d82cb;
+$tertiary: #b6e3ff; 
+
+body {
+    background: $tertiary !important; 
+    font-family: 'Roboto';
+    // max-width: 1040px;
+    
+    a {
+      text-decoration: none;
+      color: initial;
+    }
+}
+
+.strike-through {
+  text-decoration: line-through;
+}
+
+.red {
+    color:$red;
+}
+
+.top-spacing {
+    margin-top: 1rem;
+}
+
+.page-heading {
+    color: $secondary;
+    font-style: italic;
+}
+
+.fa-bars {
+    color: white;
+}
+
+#go-to-bag {
+    background: $secondary;
+            // border-radius: 0;
+    font-weight: bold;
+} 
+
+#add-to-bag {
+    button {
+        background: $secondary;
+        // border-radius: 0;
+        font-weight: bold;
+    }
+}
+
+.view-shopping-bag {
+    background: $secondary;
+    font-weight: bold;
+}
+
+.visibility-hidden { 
+    visibility: hidden;
+  }
+
+.fa-cart-arrow-down { 
+    font-size: 1.4rem;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1rem;
+}
+
+@media(min-width: 768px) {
+    .ml-md-16 {
+        margin-left: 16rem;   
+    }  
+    .ml-md-20 {
+        margin-left: 20rem;   
+    }  
+}
+
+@media(min-width: 992px) {
+    .ml-lg-21 {
+        margin-left: 21rem;   
+    }    
+    
+    .ml-lg-26 {
+        margin-left: 26rem;   
+    }  
+}
+
+
+
+
+
+
+
+
