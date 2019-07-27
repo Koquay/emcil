@@ -1,6 +1,8 @@
 <app-header></app-header>
 <div class="container top-spacing">
-    <app-page-header [productType]="productType"></app-page-header>
+    <app-page-header [headerName]="headerName" [destination]="destination" 
+        [destinationIcon]="destinationIcon" [link]="link">
+    </app-page-header>
     <div class="row">
         <div class="col-12 col-lg-3 col-md-4 mb-4" *ngFor="let product of products">
             <a [routerLink]="['/product-display', product._id]">

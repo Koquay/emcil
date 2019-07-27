@@ -28,4 +28,14 @@ export class ProductService {
     const product = this.products.find(product => product._id == id);
     return of(product);
   }
+
+  public getProductImg(productNo) {
+    const product = this.products.find(product => product.product_no == productNo);
+    return product.images[0];
+  }
+
+  public getProductDesc(productNo) {
+    const product = this.products.find(product => product.product_no == productNo);
+    return product.description;
+  }
 }

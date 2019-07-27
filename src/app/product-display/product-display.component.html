@@ -2,7 +2,12 @@
 <app-message></app-message>
 <div class="container top-spacing" id="main-container">
     <section>
-        <app-page-header [productType]="productType"></app-page-header>
+        <app-page-header 
+            [headerName]="headerName" 
+            [destination]="destination"
+            [destinationIcon]="destinationIcon"
+            [link]="link">
+        </app-page-header>
 
         <div class="row">
             <div class="col-12 col-lg-1 order-1 order-lg-0">
@@ -33,7 +38,7 @@
                         Sale: {{product.price | currency:'USD':'symbol-narrow'}}
                     </span>
                 </div>
-                <div id="size" class="mt-2">
+                <div id="size" class="mt-2" *ngIf="product.available_sizes.length">
                     <h5 class="mb-1 font-weight-bold">Select size:</h5>
                     <p class="mb-2">Sizes: XS (2), S (4-6), M (8-10), L (12-14), XL (16)<br></p>
                     <div class="btn-group" role="group">
@@ -45,7 +50,7 @@
                     </div>
                 </div>
                 <div id="add-to-bag" class="mt-4">
-                    <button class="btn btn-primary" type="button" (click)="addToCart()">
+                    <button class="btn btn-primary add-to-cart" type="button" (click)="addToCart()">
                         <i class="fa fa-cart-arrow-down mr-2"></i>
                         <strong>ADD TO SHOPPING CART</strong>
                     </button>

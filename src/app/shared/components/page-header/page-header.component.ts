@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CreateSessionCapabilities } from 'selenium-webdriver';
+import { CartService } from '../../../cart/cart.service';
 
 @Component({
   selector: 'app-page-header',
@@ -6,9 +8,14 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./page-header.component.scss']
 })
 export class PageHeaderComponent implements OnInit {
-  @Input() productType: String;
+  @Input() headerName: String;
+  @Input() destination: String;
+  @Input() destinationIcon: String;
+  @Input() link: String;
   
-  constructor() { }
+  constructor(
+    private cartService:CartService
+  ) { }
 
   ngOnInit() {
   }

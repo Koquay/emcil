@@ -1,0 +1,62 @@
+
+$primary: #0277bd; 
+$secondary: #004c8c;
+$tertiary: #58a5f0; 
+$red: #a30000; 
+
+#checkout {
+    form {
+        background: white;
+        padding: 2rem 1rem;
+        
+        #heading {
+            font-size: 1.5rem;
+            border-bottom: 4px solid $secondary;
+        }
+
+        #subheading {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: $secondary
+        }
+        
+        .expiration {
+            border: outset;
+        }
+        
+        .place-order {
+            font-weight: bold;     
+            padding: .5rem 2rem;
+        }
+        
+        select,
+        input[type="checkbox"],
+        input[type="text"] {
+            font-weight: bold;
+        }
+
+        .error-color {
+            color: $red;
+        }
+        
+        @media(min-width: 768px) {
+            padding: 2rem 10rem;
+            
+            #heading {
+                font-size: 2rem;
+            }
+            
+            .place-order {
+                font-size: 1.2rem;
+                 padding: .5rem 3em;
+                letter-spacing: .5rem; 
+            }
+        }
+               
+        @media(min-width: 992px) {           
+            .place-order {
+                 padding: .5rem 5rem;
+            }
+        }
+    }
+}

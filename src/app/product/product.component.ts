@@ -10,7 +10,10 @@ import { Product } from '../shared/models/data-model';
 })
 export class ProductComponent implements OnInit {
   private products:Product[];
-  private productType;
+  private headerName;
+  private destination = "VIEW SHOPPING CART";
+  private destinationIcon = "fa-cart-arrow-down";
+  private link = '/cart';
 
   constructor(
     private productService:ProductService,
@@ -26,7 +29,7 @@ export class ProductComponent implements OnInit {
     console.log('product_type', type)
     this.productService.getProductsByType(type).subscribe(products => {
       this.products = products;
-      this.productType = this.products[0].product_type;
+      this.headerName = this.products[0].product_type;
     })
   }
 

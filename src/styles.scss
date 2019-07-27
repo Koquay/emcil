@@ -79,6 +79,11 @@ input[type="checkbox"] {
     height: 1rem;
 }
 
+.view-height {
+    min-height: 75vh;
+  }
+  
+
 @media(min-width: 768px) {
     .ml-md-16 {
         margin-left: 16rem;   
@@ -96,6 +101,16 @@ input[type="checkbox"] {
     .ml-lg-26 {
         margin-left: 26rem;   
     }  
+
+    .view-height {
+        min-height: 76vh;
+      }
+}
+
+@media(min-width: 992px) {
+    .view-height {
+        min-height: 78vh;
+      }
 }
 
 

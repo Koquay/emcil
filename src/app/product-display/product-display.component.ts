@@ -3,6 +3,7 @@ import { Product } from '../shared/models/data-model';
 import { ProductService } from '../product/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from '../shared/message/message/message.service';
+import { CartService } from '../cart/cart.service';
 
 @Component({
   selector: 'app-product-display',
@@ -13,11 +14,15 @@ export class ProductDisplayComponent implements OnInit {
   private product:Product;
   private displayImage;
   private size = null;
+  private destination = "VIEW SHOPPING CART";
+  private destinationIcon = "fa-cart-arrow-down";
+  private link = '/cart';
   
   constructor(
     private productService:ProductService,
     private activatedRoute:ActivatedRoute,
-    private messageService:MessageService
+    private messageService:MessageService,
+    private cartService:CartService
   ) { }
 
   ngOnInit() {
@@ -44,13 +49,19 @@ export class ProductDisplayComponent implements OnInit {
   }
 
   private addToCart() {
-    if(this.size == null) {
-      this.messageService.sendInfo("You must select a size to add this item.")
-      return;
-    }
+    if(this.product.available_sizes.length) {
+      if(this.size == null) {
+        this.messageService.sendInfo("You must select a size to add this item.")
+        return;
+      }
+    }    
 
-    this.messageService.sendSuccess("Item added to your cart.")
-    this.size = null;
+    this.cartService.addToCart(this.product, 1, this.size).subscribe(order => {
+      console.log('Item added to cart')
+      this.messageService.sendSuccess("Item added to your cart.")
+      this.size = null;
+    })
+    
   }
 
 }

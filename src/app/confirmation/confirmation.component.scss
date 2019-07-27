@@ -1,0 +1,46 @@
+// $primary: #b0bec5; 
+// $secondary: #808e95;
+// $tertiary: #e2f1f8;
+
+$primary: #0277bd; 
+$secondary: #004c8c;
+$tertiary: #58a5f0;
+
+$red: #a30000; 
+
+// $primary: #82b1ff; 
+// $secondary: #4d82cb;
+// $tertiary: #b6e3ff;
+
+#confirmation {
+    background: white;
+    
+    #order-no {
+        font-size: 1.2rem;
+        
+        #no {
+            font-weight: bold;
+        }
+    }
+    
+    .fa-edit {
+        color: $red;
+    }
+}
+
+#confirmation-head {
+    color: $tertiary;
+    font-style: italic;
+    
+    h1 {
+        font-weight: bold;   
+    }            
+}
+#thank-you {
+    font-size: 1rem;
+}
+
+#order-info-2 {
+    background: $secondary;
+    color: white;
+}

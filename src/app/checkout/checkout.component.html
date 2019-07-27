@@ -1,0 +1,276 @@
+<app-header></app-header>
+<div class="container top-spacing" id="checkout">
+    <app-page-header [headerName]="headerName" [destination]="destination" [destinationIcon]="destinationIcon" [link]="link">
+    </app-page-header>
+    <form class="mb-5" *ngIf="order" #checkoutForm="ngForm" (ngSubmit)="placeOrder()">
+        <section>
+            <div class="form-row mb-4">
+                <div class="col-12 text-center"><span id="heading">Delivery Information<br></span></div>
+            </div>
+            <section id="shippingAddress">
+                <div class="form-row mb-2">
+                    <div class="col-12"><span id="subheading">Shipping Address<br></span></div>
+                </div>
+                <div class="form-row">
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label>First Name</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.shipping_address.first_name" #first_name="ngModel"
+                            name="first_name">
+                        <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched)" class="error-color">
+                            <div *ngIf="first_name.errors.required">
+                                First Name is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label>Last Name</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.shipping_address.last_name" #last_name="ngModel"
+                            name="last_name">
+                        <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)" class="error-color">
+                            <div *ngIf="last_name.errors.required">
+                                Last Name is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label>Phone</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.shipping_address.phone" #phone="ngModel" name="phone">
+                        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error-color">
+                            <div *ngIf="phone.errors.required">
+                                Phone is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label>Email</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.shipping_address.email" #email="ngModel" name="email">
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-color">
+                            <div *ngIf="email.errors.required">
+                                Email is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label>Street</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.shipping_address.street" #street="ngModel" name="street">
+                        <div *ngIf="street.invalid && (street.dirty || street.touched)" class="error-color">
+                            <div *ngIf="street.errors.required">
+                                Street is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label>City</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.shipping_address.city" #city="ngModel" name="city">
+                        <div *ngIf="city.invalid && (city.dirty || city.touched)" class="error-color">
+                            <div *ngIf="city.errors.required">
+                                City is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-12 col-lg-3 mb-4">
+                        <label>Province / State</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.shipping_address.province" #province="ngModel"
+                            name="province">
+                        <div *ngIf="province.invalid && (province.dirty || province.touched)" class="error-color">
+                            <div *ngIf="province.errors.required">
+                                Province / State is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 mb-4 offset-lg-3">
+                        <label>Postal / Zip Code</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.shipping_address.postal_code" #postal_code="ngModel"
+                            name="postal_code">
+                        <div *ngIf="postal_code.invalid && (postal_code.dirty || postal_code.touched)" class="error-color">
+                            <div *ngIf="postal_code.errors.required">
+                                Postal / Zip Code is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="form-row">
+                <div class="col-12 mb-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="shippingAndBillingSame" checked="" [(ngModel)]="order.customer.shippingAndBillingSame"
+                            name="shippingAndBillingSame">
+                        <label class="form-check-label" for="shippingAndBillingSame">Shipping address same as billing address?</label>
+                    </div>
+                </div>
+            </div>
+            <section id="billingAddress" *ngIf="!order.customer.shippingAndBillingSame">
+                <div class="form-row mb-2">
+                    <div class="col-12"><span id="subheading">Billing Address<br></span></div>
+                </div>
+                <div class="form-row">
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label>First Name</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.billing_address.first_name" #bill_first_name="ngModel"
+                            name="bill_first_name">
+                        <div *ngIf="bill_first_name.invalid && (bill_first_name.dirty || bill_first_name.touched)" class="error-color">
+                            <div *ngIf="bill_first_name.errors.required">
+                                First Name is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label>Last Name</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.billing_address.last_name" #last_name="ngModel"
+                            name="last_name">
+                        <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched)" class="error-color">
+                            <div *ngIf="last_name.errors.required">
+                                Last Name is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label>Phone</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.billing_address.phone" #phone="ngModel" name="phone">
+                        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error-color">
+                            <div *ngIf="phone.errors.required">
+                                Phone is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label>Email</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.billing_address.email" #email="ngModel" name="email">
+                        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-color">
+                            <div *ngIf="email.errors.required">
+                                Email is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label>Street</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.billing_address.street" #street="ngModel" name="street">
+                        <div *ngIf="street.invalid && (street.dirty || street.touched)" class="error-color">
+                            <div *ngIf="street.errors.required">
+                                Street is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 mb-4">
+                        <label>City</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.billing_address.city" #city="ngModel" name="city">
+                        <div *ngIf="city.invalid && (city.dirty || city.touched)" class="error-color">
+                            <div *ngIf="city.errors.required">
+                                City is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-12 col-lg-3 mb-4">
+                        <label>Province / State</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.billing_address.province" #province="ngModel"
+                            name="province">
+                        <div *ngIf="province.invalid && (province.dirty || province.touched)" class="error-color">
+                            <div *ngIf="province.errors.required">
+                                Province / State is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 mb-4 offset-lg-3">
+                        <label>Postal / Zip Code</label>
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.billing_address.postal_code" #postal_code="ngModel"
+                            name="postal_code">
+                        <div *ngIf="postal_code.invalid && (postal_code.dirty || postal_code.touched)" class="error-color">
+                            <div *ngIf="postal_code.errors.required">
+                                Postal / Zip Code is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="form-row">
+                <div class="col-12 mb-4 col-lg-6">
+                    <label>Special Instructions</label>
+                    <textarea class="form-control" [(ngModel)]="order.special_instructions" name="special_instructions">
+                    </textarea>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="form-row mb-2">
+                <div class="col-12 text-center"><span id="heading">Payment Information<br></span></div>
+            </div>
+            <div class="form-row mb-4">
+                <div class="col-12 text-center">
+                    <img class="img-fluid" src="assets/img/payment.png">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-12 col-lg-6 mb-4">
+                    <label>Card Number</label>
+                    <input class="form-control" type="text" required [(ngModel)]="order.customer.payment.credit_card_no" #credit_card_no="ngModel"
+                        name="credit_card_no">
+                    <div *ngIf="credit_card_no.invalid && (credit_card_no.dirty || credit_card_no.touched)" class="error-color">
+                        <div *ngIf="credit_card_no.errors.required">
+                            Credit Card Number is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mb-4 col-lg-6">
+                    <label>CW (On back of card)</label>
+                    <input class="form-control" type="text" required maxlength="3" [(ngModel)]="order.customer.payment.cw" #cw="ngModel" name="cw">
+                    <div *ngIf="cw.invalid && (cw.dirty || cw.touched)" class="error-color">
+                        <div *ngIf="cw.errors.required">
+                            CW is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-12 col-lg-6 mb-4">
+                    <label>Expiration Month</label>
+                    <select class="form-control expiration" required name="exp_month" [(ngModel)]="order.customer.payment.exp_month" #exp_month="ngModel">
+                        <option *ngFor="let expMonth of expMonths">
+                            {{expMonth.month}}
+                        </option>
+                    </select>
+                    <div *ngIf="exp_month.invalid && (exp_month.dirty || exp_month.touched)" class="error-color">
+                        <div *ngIf="exp_month.errors.required">
+                            Expiration Month is required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6 mb-4">
+                    <label>Expiration Year<br></label>
+                    <select class="form-control expiration" required name="exp_year" [(ngModel)]="order.customer.payment.exp_year" #exp_year="ngModel">
+                        <option *ngFor="let expYear of expYears">
+                            {{expYear.year}}
+                        </option>
+                    </select>
+                    <div *ngIf="exp_year.invalid && (exp_year.dirty || exp_year.touched)" class="error-color">
+                        <div *ngIf="exp_year.errors.required">
+                            Expiration Year is required
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="text-center">
+            <div class="mt-4">
+                <button class="btn btn-primary place-order" id="go-to-bag" 
+                    type="button" (click)="placeOrder()" [disabled]="!checkoutForm.form.valid">
+                    PLACE ORDER
+                </button>
+            </div>
+        </section>
+    </form>
+</div>
+<app-footer></app-footer>

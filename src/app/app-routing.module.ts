@@ -19,6 +19,22 @@ const routes: Routes = [
     data: {breadcrumb: 'Product Display'}
   },
   {
+    path: 'cart',
+    loadChildren: './cart/cart.module#CartModule'
+  },
+  {
+    path: 'checkout',
+    loadChildren: './checkout/checkout.module#CheckoutModule'
+  },
+  {
+    path: 'order',
+    loadChildren: './order/order.module#OrderModule'
+  },
+  {
+    path: 'confirmation',
+    loadChildren: './confirmation/confirmation.module#ConfirmationModule'
+  },
+  {
     path: '', pathMatch: 'prefix', redirectTo: 'home'
   }
 ];
