@@ -75,10 +75,17 @@ export class Order {
     customer: Customer;
     order_items: OrderItem[] = [];
     special_instructions: string;
+    status: string;
     created_on:Date;    
 
     constructor() {
         this.customer = new Customer();        
-    }
+    }    
+}
+
+export class SearchCriteria {
+    order_no: string;
+    first_name: string;
+    last_name: string;      
 }
 

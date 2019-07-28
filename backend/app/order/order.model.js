@@ -52,6 +52,10 @@ const OrderSchema = new Schema({
     customer: CustomerSchema,
     order_items: [OrderItemSchema],
     special_instructions: String,
+    status: {
+        type:String,
+        default: "P"
+    },
     created_on: {
         type:Date,
     }

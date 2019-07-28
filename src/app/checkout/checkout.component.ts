@@ -44,7 +44,8 @@ export class CheckoutComponent implements OnInit {
       this.order.customer.billing_address = this.order.customer.shipping_address;
     }
     this.orderService.placeOrder(this.order).subscribe(order => {
-      this.confirmationService.setOrder(order);
+      let newOrder = JSON.parse(JSON.stringify(order));
+      this.confirmationService.setOrder(newOrder);
       this.router.navigate(['/confirmation']);
     })
   }

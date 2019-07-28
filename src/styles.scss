@@ -13,6 +13,7 @@ $red: #a30000;
 $primary: #82b1ff; 
 $secondary: #4d82cb;
 $tertiary: #b6e3ff; 
+$link-blue: #004c8c;
 
 body {
     background: $tertiary !important; 
@@ -21,7 +22,7 @@ body {
     
     a {
       text-decoration: none;
-      color: initial;
+      color: $link-blue !important;
     }
 }
 

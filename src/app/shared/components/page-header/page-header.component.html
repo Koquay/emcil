@@ -1,11 +1,11 @@
 <div class="row mb-3">
-    <div class="col-12 text-center d-md-flex justify-content-md-start col-md-6">
+    <div class="col-12 text-center d-md-flex justify-content-md-start col-md-8">
         <h1 class="page-heading">
             <em>{{headerName}}</em><br>
         </h1>
     </div>
 
-    <div class="col-12 text-center d-md-flex justify-content-md-end col-md-6" *ngIf="destination">
+    <div class="col-12 text-center d-md-flex justify-content-md-end col-md-4" *ngIf="destination">
         <button class="btn btn-primary d-lg-flex destination-button" type="button"
             [disabled]="cartService.order == null || !cartService.order.order_items.length" 
             routerLink="{{link}}">

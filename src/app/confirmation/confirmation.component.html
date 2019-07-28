@@ -54,13 +54,6 @@
                     <strong>{{order.customer.shipping_address.postal_code}}</strong><br>
                 </span>
             </div>
-            <!-- <div class="col-12 col-lg-4 col-md-6 mb-2">
-                <span class="d-block">Billing Address:</span><span class="d-block font-weight-bold"><strong>Mary
-                        Admin
-                    </strong></span><span class="d-block font-weight-bold"><strong>50 Node Plaza</strong><br></span><span
-                    class="d-block font-weight-bold"><strong>Maynard, MA</strong><br></span>
-                <span class="d-block font-weight-bold"><strong>12345</strong><br></span>
-            </div> -->
             <div class="col-12 col-lg-4 col-md-6 mb-2">
                 <span class="d-block">Billing Address:</span>
                 <span class="d-block font-weight-bold">
@@ -136,7 +129,7 @@
             </div>
             <div class="col col-lg-2 text-right">
                 <span class="font-weight-bold">
-                    $130.99
+                    {{order.subtotal | currency:'USD':'symbol-narrow'}}
                 </span>
             </div>
         </div>
@@ -145,12 +138,18 @@
                 <span>Tax</span>
             </div>
             <div class="col col-lg-2 text-right">
-                <span class="font-weight-bold">$13.99</span>
+                <span class="font-weight-bold">
+                        {{order.tax | currency:'USD':'symbol-narrow'}}
+                </span>
             </div>
         </div>
         <div class="row">
             <div class="col col-lg-2 text-right offset-lg-5"><span>Discount</span></div>
-            <div class="col col-lg-2 text-right"><span id="discount" class="font-weight-bold">$10.99</span></div>
+            <div class="col col-lg-2 text-right">
+                <span id="discount" class="font-weight-bold">
+                        {{order.discount | currency:'USD':'symbol-narrow'}}
+                </span>
+            </div>
         </div>
         <div class="row">
             <div class="col col-lg-3 text-right offset-lg-6">
@@ -159,7 +158,11 @@
         </div>
         <div class="row pb-2" id="total-row">
             <div class="col col-lg-2 text-right offset-lg-5"><span>Total</span></div>
-            <div class="col col-lg-2 text-right"><span class="font-weight-bold">$150.99</span></div>
+            <div class="col col-lg-2 text-right">
+                <span class="font-weight-bold">
+                        {{order.total | currency:'USD':'symbol-narrow'}}
+                </span>
+            </div>
         </div>
     </section>
 </div>

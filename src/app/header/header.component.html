@@ -30,7 +30,9 @@
                         <li class="nav-item category" role="presentation">
                             <a class="nav-link active">WOMEN'S<br></a>
                             <ul class="list-unstyled categories visibility-hidden">
-                                <li class="mb-2 category-item"><a class="active" href="product.html">Dresses<br></a></li>
+                                <li class="mb-2 category-item">
+                                    <a class="active" [routerLink]="['/product', 'dresses']">Dresses<br></a>
+                                </li>
                                 <li class="mb-2"><a href="women%27s%20shoes.html">Shoes<br></a></li>
                                 <li class="mb-2"><a href="handbags.html">Handbags<br></a></li>
                                 <li class="mb-2"><a>Jewelries &amp; Accessories<br></a></li>
@@ -47,7 +49,9 @@
                         <li class="nav-item" role="presentation"><a class="nav-link" href="checkout.html">CHECKOUT</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="confirmation.html">CONFIRMATION</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" href="">TRACK ORDER</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" href="orders.html">ORDERS</a></li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" [routerLink]="['/pending-orders']">PENDING ORDERS</a>
+                        </li>
                     </ul>
                 </div>
             </div>

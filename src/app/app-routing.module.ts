@@ -35,6 +35,10 @@ const routes: Routes = [
     loadChildren: './confirmation/confirmation.module#ConfirmationModule'
   },
   {
+    path: 'pending-orders',
+    loadChildren: './pending-orders/pending-orders.module#PendingOrdersModule'
+  },
+  {
     path: '', pathMatch: 'prefix', redirectTo: 'home'
   }
 ];

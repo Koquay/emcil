@@ -1,0 +1,56 @@
+$red: #a30000; 
+
+$primary: #0277bd; 
+$secondary: #004c8c;
+$tertiary: #58a5f0;
+
+#orders {
+    #totals,
+    #order {
+        background: white;
+        // padding: 1rem;
+    }
+    
+    
+    #title {
+        font-weight: bold;
+        font-style: italic;
+        color: $tertiary;
+    }
+    
+    #search-header {
+        font-size: 2rem;
+        color: $secondary;
+        border-bottom: solid $secondary;
+    }
+    
+    #search {
+        button {
+            background: $secondary;
+            padding: .4rem 2.2rem;
+            font-weight: bold;
+        }
+    }
+    
+    #order {
+        // padding: 1rem 2rem; 
+    }
+    
+    @media(min-width: 768px) {
+        form {
+            .form-label {
+                text-align: right;
+            }    
+        }    
+        
+        #order {
+            padding: 1rem 2rem; 
+            
+            h5 {
+                font-weight: bold;
+            }
+        }
+    }
+    
+    
+}
