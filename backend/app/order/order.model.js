@@ -21,9 +21,9 @@ const PaymentSchema = new Schema({
 
 const CustomerSchema = new Schema({
     shippingAndBillingSame:Boolean,
-    shipping_address: [AddressSchema],
-    billing_address: [AddressSchema],
-    payment: [PaymentSchema]
+    shipping_address: AddressSchema,
+    billing_address: AddressSchema,
+    payment: PaymentSchema
 }, {_id: false});
 
 const OrderItemSchema = new Schema({

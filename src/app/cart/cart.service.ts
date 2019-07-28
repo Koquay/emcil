@@ -13,6 +13,7 @@ export class CartService {
   public addToCart(product:Product, quantity=1, size=null) {
     if(!this.order) {
       this.order = new Order();
+      this.order.order_no = Math.floor((Math.random() * 1000000) + 1);
     }
 
     let orderItem = new OrderItem();

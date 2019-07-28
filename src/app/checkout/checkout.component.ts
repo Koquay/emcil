@@ -40,7 +40,11 @@ export class CheckoutComponent implements OnInit {
 
   private placeOrder() {
     console.log('order', this.order)
+    if(this.order.customer.shippingAndBillingSame) {
+      this.order.customer.billing_address = this.order.customer.shipping_address;
+    }
     this.orderService.placeOrder(this.order).subscribe(order => {
+      this.confirmationService.setOrder(order);
       this.router.navigate(['/confirmation']);
     })
   }

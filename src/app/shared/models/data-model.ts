@@ -23,6 +23,10 @@ export class Address {
     city: string;
     province: string;
     postal_code: string
+
+    public getFullName() {
+        return this.first_name + ' ' + this.last_name;
+    }
 };
 
 export class Payment {
@@ -42,7 +46,7 @@ export class Customer {
         this.shipping_address = new Address();
         this.billing_address = new Address();    
         this.payment = new Payment();
-    }
+    }    
 };
 
 export class OrderItem {
