@@ -39,6 +39,10 @@ const routes: Routes = [
     loadChildren: './pending-orders/pending-orders.module#PendingOrdersModule'
   },
   {
+    path: 'order-picker',
+    loadChildren: './order-picker/order-picker.module#OrderPickerModule'
+  },
+  {
     path: '', pathMatch: 'prefix', redirectTo: 'home'
   }
 ];

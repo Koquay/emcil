@@ -1,0 +1,136 @@
+<app-header></app-header>
+<div class="container top-spacing">
+    <app-page-header [headerName]="headerName" [destination]="destination" [destinationIcon]="destinationIcon" [link]="link">
+    </app-page-header>
+</div>
+<div class="container mb-5" id="order-picker">
+    <section class="pt-4">
+        <div class="row">
+            <div class="col-12" id="order-no">
+                <span class="mr-2">Order No.:</span>
+                <span id="no">{{order.order_no}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" id="order-no">
+                <span class="mr-2">Placed On:</span>
+                <span id="no">
+                    <strong>{{order.created_on | date}}</strong><br>
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex d-lg-flex align-items-baseline"><label class="mr-2">Pending:</label><input type="radio"
+                    name="order-status" checked=""></div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex d-lg-flex align-items-baseline"><label class="mr-2">Shipped:</label><input type="radio"
+                    name="order-status"></div>
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex d-lg-flex align-items-baseline"><label class="mr-2">Cancelled:</label><input type="radio"
+                    name="order-status"></div>
+        </div>
+        <div class="row py-3 my-2" id="order-info-2">
+            <div class="col-12 col-lg-4 col-md-6 mb-2"><span class="d-block mb-1">Estimated delivery date is:</span><span
+                    class="d-block font-weight-bold mb-2"><strong>Jul 21, 2019</strong></span><span class="d-block mb-1">Shipping
+                    speed is:</span><span class="d-block font-weight-bold mb-2"><strong>Standard Shipping</strong><br></span></div>
+            <div class="col-12 col-lg-4 col-md-6 mb-2"><span class="d-block">Shipping Address:</span><span class="d-block font-weight-bold"><strong>John&nbsp;
+                        Admin
+                    </strong></span><span class="d-block font-weight-bold"><strong>40 Angular Place</strong><br></span><span
+                    class="d-block font-weight-bold"><strong>Maynard, MA</strong><br></span>
+                <span class="d-block font-weight-bold"><strong>12345</strong><br></span>
+            </div>
+            <div class="col-12 col-lg-4 col-md-6 mb-2"><span class="d-block">Billing Address:</span><span class="d-block font-weight-bold"><strong>Mary
+                        Admin
+                    </strong></span><span class="d-block font-weight-bold"><strong>50 Node Plaza</strong><br></span><span
+                    class="d-block font-weight-bold"><strong>Maynard, MA</strong><br></span>
+                <span class="d-block font-weight-bold"><strong>12345</strong><br></span>
+            </div>
+        </div>
+        <section>
+            <div class="row d-lg-flex justify-content-lg-center d-none d-lg-flex pt-3 font-weight-bold">
+                <div class="col-2 text-center col-lg-1">
+                    <h5>Product</h5>
+                </div>
+                <div class="col-1 text-center">
+                    <h5>Product No.</h5>
+                </div>
+                <div class="col-1 text-center">
+                    <h5>Quantity</h5>
+                </div>
+                <div class="col-1 text-right">
+                    <h5>Price</h5>
+                </div>
+                <div class="col-1 text-center">
+                    <h5>Delete</h5>
+                </div>
+            </div>
+            <div class="row d-lg-flex justify-content-lg-center d-none d-lg-flex">
+                <div class="col-12 text-center">
+                    <hr class="mt-0">
+                </div>
+            </div>
+            <div class="row d-lg-flex justify-content-lg-center">
+                <div class="col-6 text-center col-lg-1"><img class="img-fluid" src="assets/img/18138675.jpg"></div>
+                <div class="col-11 col-lg-1 col-md-10 offset-1 offset-md-2 offset-lg-0 text-lg-center"><span class="mr-2 d-lg-none font-weight-bold">Item
+                        No.:
+                    </span><span>20</span></div>
+                <div class="col-6 text-center col-lg-1"><span class="mr-2 d-lg-none font-weight-bold">Quantity:</span><span>1</span></div>
+                <div class="col-6 col-lg-1 text-lg-right"><span class="mr-2 d-lg-none font-weight-bold">Price:</span><span>$65.99</span></div>
+                <div class="col-6 text-center col-lg-1"><span class="mr-2 d-lg-none font-weight-bold">Delete::</span><i class="fa fa-trash-o"></i></div>
+                <div class="col-12 text-center">
+                    <hr>
+                </div>
+            </div>
+            <div class="row d-lg-flex justify-content-lg-center">
+                <div class="col-6 text-center col-lg-1"><img class="img-fluid" src="assets/img/18340142.jpg"></div>
+                <div class="col-11 col-lg-1 col-md-10 offset-1 offset-md-2 offset-lg-0 text-lg-center"><span class="mr-2 d-lg-none font-weight-bold">Item
+                        No.:
+                    </span><span>26</span></div>
+                <div class="col-6 text-center col-lg-1"><span class="mr-2 d-lg-none font-weight-bold">Quantity:</span><span>1</span></div>
+                <div class="col-6 col-lg-1 text-lg-right"><span class="mr-2 d-lg-none font-weight-bold">Price:</span><span>$65.99</span></div>
+                <div class="col-6 text-center col-lg-1"><span class="mr-2 d-lg-none font-weight-bold">Delete::</span><i class="fa fa-trash-o"></i></div>
+                <div class="col-12 text-center">
+                    <hr>
+                </div>
+            </div>
+            <div class="row d-lg-flex justify-content-lg-center">
+                <div class="col-6 text-center col-lg-1"><img class="img-fluid" src="assets/img/19061780.jpg"></div>
+                <div class="col-11 col-lg-1 col-md-10 offset-1 offset-md-2 offset-lg-0 text-lg-center"><span class="mr-2 d-lg-none font-weight-bold">Item
+                        No.:
+                    </span><span>44</span></div>
+                <div class="col-6 text-center col-lg-1"><span class="mr-2 d-lg-none font-weight-bold">Quantity:</span><span>1</span></div>
+                <div class="col-6 col-lg-1 text-lg-right"><span class="mr-2 d-lg-none font-weight-bold">Price:</span><span>$65.99</span></div>
+                <div class="col-6 text-center col-lg-1"><span class="mr-2 d-lg-none font-weight-bold">Delete::</span><i class="fa fa-trash-o"></i></div>
+                <div class="col-12 text-center">
+                    <hr>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section>
+        <div class="row">
+            <div class="col-2 text-right ml-lg-21 ml-md-16"><span>Subtotal</span></div>
+            <div class="col-2 text-right"><span class="font-weight-bold">$130.99</span></div>
+        </div>
+        <div class="row">
+            <div class="col-2 text-right ml-lg-21 ml-md-16"><span>Tax</span></div>
+            <div class="col-2 text-right"><span class="font-weight-bold">$13.99</span></div>
+        </div>
+        <div class="row">
+            <div class="col-2 text-right ml-lg-21 ml-md-16"><span>Discount</span></div>
+            <div class="col-2 text-right"><span id="discount" class="font-weight-bold">$10.99</span></div>
+        </div>
+        <div class="row">
+            <div class="col-3 text-right ml-lg-26 ml-md-20">
+                <hr>
+            </div>
+        </div>
+        <div class="row pb-2" id="total-row">
+            <div class="col-2 text-right ml-lg-21 ml-md-16"><span>Total</span></div>
+            <div class="col-2 text-right"><span class="font-weight-bold">$150.99</span></div>
+        </div>
+    </section>
+</div>
+<app-footer></app-footer>
