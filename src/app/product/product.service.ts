@@ -37,5 +37,5 @@ export class ProductService {
   public getProductDesc(productNo) {
     const product = this.products.find(product => product.product_no == productNo);
     return product.description;
-  }
+  }  
 }

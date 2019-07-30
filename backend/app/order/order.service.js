@@ -1,5 +1,6 @@
 require('./order.model');
 const Order = require('mongoose').model('Order')
+const Product = require('mongoose').model('Product')
 const moment = require('moment-timezone');
 
 exports.post = async (newOrder) => {
@@ -46,7 +47,7 @@ const buildAggregatePipeline = (searchParams) => {
     let aggregatePipeline = [];
 
     let orderNoMatch = buildOrderNoMatch(order_no);
-    if(orderNoMatch) {
+    if (orderNoMatch) {
         aggregatePipeline.push(orderNoMatch);
     }
 
@@ -76,8 +77,52 @@ const buildOrderNoMatch = (orderNo) => {
 
 const buildFirstNameMatch = (firstName) => {
     if (firstName.length) {
-        return { $match: { first_name: firstName  } }
+        return { $match: { first_name: firstName } }
     }
 
     return null;
+}
+
+exports.getProductsForOrder = async (prodNos) => {
+    try {
+        const products = await Product.find({ product_no: {$in: prodNos} });
+        console.log('products', products)
+        return products;
+    } catch (error) {
+        throw error;
+    }
+}
+
+exports.setStatus = async (orderInfo) => {
+    console.log('orderInfo.status', orderInfo.status)
+    let date = moment.tz('America/Toronto').format('YYYY-MM-DD hh:mm A');
+
+    try {
+        if(orderInfo.status == "P") {
+            await Order.updateOne({order_no:orderInfo.orderNo}, 
+                {status:orderInfo.status, shipped_date:null, cancelled_date:null})    
+        }
+        else if(orderInfo.status == "S") {
+            await Order.updateOne({order_no:orderInfo.orderNo}, 
+                {status:orderInfo.status, shipped_date:date, cancelled_date:null})    
+        }
+        else if(orderInfo.status == "C") {
+            await Order.updateOne({order_no:orderInfo.orderNo}, 
+                {status:orderInfo.status, cancelled_date:date, shipped_date:null})    
+        } 
+        
+        return [];
+    } catch(error) {
+        throw error;
+    }
+}
+
+exports.getSearchedOrder = async (orderNo) => {
+    try {
+        const order = await Order.findOne({ order_no: orderNo });
+        console.log('order', order)
+        return order;
+    } catch (error) {
+        throw error;
+    }
 }

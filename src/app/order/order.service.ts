@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order, SearchCriteria } from '../shared/models/data-model';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Injectable({
@@ -10,6 +10,7 @@ import { of } from 'rxjs';
 export class OrderService {
   private orderUrl = '/api/order/';
   private orderSearchUrl = '/api/order/search/';
+  private orderSearchedUrl = '/api/order/';  
   private orders:Order[];
 
   constructor(
@@ -57,5 +58,15 @@ export class OrderService {
     const params = `?searchCriteria=${searchParams}`
     console.log('search params', params)
     return params;
+  }
+
+  public getSearchedOrder(orderNo) {
+    return this.httpClient.get<Order>(`${this.orderSearchedUrl}${orderNo}/1`).pipe(
+      map(order => {
+        console.log('getSearchedOrder', order);
+        this.orders.push(order);
+        return;
+      })
+    )
   }
 }
