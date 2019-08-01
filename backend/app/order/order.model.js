@@ -35,7 +35,7 @@ const OrderItemSchema = new Schema({
     shipped_date: String,
     cancelled: Boolean,
     cancelled_date: Date
-}, {_id: false});
+});
 
 const OrderSchema = new Schema({
     order_no: Number,

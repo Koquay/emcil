@@ -20,9 +20,10 @@ body {
     font-family: 'Roboto';
     // max-width: 1040px;
     
-    a {
-      text-decoration: none;
+    a {        
+      text-decoration: none !important;
       color: $link-blue !important;
+      cursor: pointer;
     }
 }
 
@@ -83,6 +84,26 @@ input[type="checkbox"] {
 .view-height {
     min-height: 75vh;
   }
+
+  .header-wrapper {
+    position: relative;
+  
+    .overlay {
+      position: absolute;
+      top: 9.7rem;
+      left: 0;
+      z-index: 10;
+      width: 100vw;
+      height: 120vh;
+      background: rgba(0, 0, 0, 0.5);
+      transition: .4s;
+      
+    }
+  
+    #header {
+      z-index: 20; 
+    }
+  }  
   
 
 @media(min-width: 768px) {

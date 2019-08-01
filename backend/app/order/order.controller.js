@@ -74,3 +74,16 @@ exports.getSearchedOrder = async (req, res) => {
         throw error;
     }    
 }
+
+
+exports.deleteItem = async (req, res) => {
+    console.log('*** Order Controller deleteItem ***');
+    console.log('req.body', req.body)
+    
+    try {
+        const order = await OrderService.deleteItem(req.body.order, req.body.itemId);
+        return res.status(201).json(order);
+    } catch(error) {
+        throw error;
+    }    
+}

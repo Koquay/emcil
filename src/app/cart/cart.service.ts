@@ -6,7 +6,7 @@ import { of } from 'rxjs';
   providedIn: 'root'
 })
 export class CartService {
-  private order:Order = null;
+  public order:Order = null;
   
   constructor() { }
 

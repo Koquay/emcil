@@ -68,7 +68,7 @@ function checkForEmptyAggregate(aggregatePipeline) {
 }
 
 const buildOrderNoMatch = (orderNo) => {
-    if (orderNo.length) {
+    if (orderNo && orderNo.length) {
         return { $match: { order_no: { $eq: +orderNo } } }
     }
 
@@ -85,7 +85,7 @@ const buildFirstNameMatch = (firstName) => {
 
 exports.getProductsForOrder = async (prodNos) => {
     try {
-        const products = await Product.find({ product_no: {$in: prodNos} });
+        const products = await Product.find({ product_no: { $in: prodNos } });
         console.log('products', products)
         return products;
     } catch (error) {
@@ -98,21 +98,21 @@ exports.setStatus = async (orderInfo) => {
     let date = moment.tz('America/Toronto').format('YYYY-MM-DD hh:mm A');
 
     try {
-        if(orderInfo.status == "P") {
-            await Order.updateOne({order_no:orderInfo.orderNo}, 
-                {status:orderInfo.status, shipped_date:null, cancelled_date:null})    
+        if (orderInfo.status == "P") {
+            await Order.updateOne({ order_no: orderInfo.orderNo },
+                { status: orderInfo.status, shipped_date: null, cancelled_date: null })
         }
-        else if(orderInfo.status == "S") {
-            await Order.updateOne({order_no:orderInfo.orderNo}, 
-                {status:orderInfo.status, shipped_date:date, cancelled_date:null})    
+        else if (orderInfo.status == "S") {
+            await Order.updateOne({ order_no: orderInfo.orderNo },
+                { status: orderInfo.status, shipped_date: date, cancelled_date: null })
         }
-        else if(orderInfo.status == "C") {
-            await Order.updateOne({order_no:orderInfo.orderNo}, 
-                {status:orderInfo.status, cancelled_date:date, shipped_date:null})    
-        } 
-        
+        else if (orderInfo.status == "C") {
+            await Order.updateOne({ order_no: orderInfo.orderNo },
+                { status: orderInfo.status, cancelled_date: date, shipped_date: null })
+        }
+
         return [];
-    } catch(error) {
+    } catch (error) {
         throw error;
     }
 }
@@ -122,6 +122,39 @@ exports.getSearchedOrder = async (orderNo) => {
         const order = await Order.findOne({ order_no: orderNo });
         console.log('order', order)
         return order;
+    } catch (error) {
+        throw error;
+    }
+}
+
+exports.deleteItem = async (order, itemId) => {
+    try {
+        const newOrder = await Order.findOneAndUpdate({ _id: order._id },
+            {
+                $pull: { order_items: { _id: itemId } },
+                $set: {
+                    subtotal: order.subtotal,
+                    discount: order.discount,
+                    tax: order.tax,
+                    total: order.total
+                }
+            },
+            { new: true });
+            
+        if (newOrder.order_items.length == 0) {
+            this.deleteOrder(newOrder._id);
+            return null;
+        }
+        return newOrder;
+    } catch (error) {
+        throw error;
+    }
+}
+
+exports.deleteOrder = async (orderId) => {
+    try {
+        await Order.deleteOne({ _id: orderId });
+        return [];
     } catch (error) {
         throw error;
     }

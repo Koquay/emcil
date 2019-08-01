@@ -7,7 +7,7 @@
 
     <div class="col-12 text-center d-md-flex justify-content-md-end col-md-4" *ngIf="destination">
         <button class="btn btn-primary d-lg-flex destination-button" type="button"
-            [disabled]="cartService.order == null || !cartService.order.order_items.length" 
+            
             routerLink="{{link}}">
             <i class="fa {{destinationIcon}} mr-2"></i>
             <strong>{{destination}}</strong>

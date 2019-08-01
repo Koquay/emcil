@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from './product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Product } from '../shared/models/data-model';
 
 @Component({
@@ -17,8 +17,19 @@ export class ProductComponent implements OnInit {
 
   constructor(
     private productService:ProductService,
-    private activatedRoute:ActivatedRoute
-  ) { }
+    private activatedRoute:ActivatedRoute,
+    private router: Router
+  ) { 
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    } 
+
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        this.router.navigated = false;
+      }
+    });
+  }
 
   ngOnInit() {
     this.getProductsByType();

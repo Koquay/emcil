@@ -3,7 +3,7 @@
     <app-page-header [headerName]="headerName" [destination]="destination" [destinationIcon]="destinationIcon" [link]="link">
     </app-page-header>
 </div>
-<div class="container mb-5" id="order-picker">
+<div class="container mb-5 view-height" id="order-picker">
     <section class="pt-4">
         <div class="row mb-3">
             <div class="col-12 " id="order-no">
@@ -15,7 +15,7 @@
         <div class="row mb-3">
             <div class="col-12 d-flex d-lg-flex align-items-baseline">
                 <label class="mr-2">Pending:</label>
-                <input type="radio" name="order_status" checked="" (change)="setOrderStatus()" value="P" [(ngModel)]="order.status">
+                <input type="radio" name="order_status" (change)="setOrderStatus()" value="P" [(ngModel)]="order.status">
             </div>
             <div class="col-12" id="">
                 <span class="mr-2">Order Date:</span>
@@ -143,25 +143,27 @@
                     <div class="col-6 text-center col-lg-1">
                         <img class="img-fluid" src="assets/img/{{getProductImg(item.product_no)}}">
                     </div>
-                    <div class="col-11 col-lg-2 col-md-10 offset-1 offset-md-2 offset-lg-0 text-lg-center">
+                    <div class="col-11 col-lg-2 offset-md-1 offset-lg-0 text-lg-center">
                         <span class="mr-2 d-lg-none font-weight-bold">Item No.:</span>
                         <span>{{item.product_no}}</span>
                     </div>
-                    <div class="col-6 text-center col-lg-2">
+                    <div class="col-11 col-lg-2 offset-md-1 offset-lg-0  text-lg-center">
                         <span class="mr-2 d-lg-none font-weight-bold">Quantity:</span>
                         <span>{{item.quantity}}</span>
                     </div>
-                    <div class="col-6 col-lg-1 text-lg-right">
+                    <div class="col-11 col-lg-1 offset-md-1 offset-lg-0  text-lg-right">
                         <span class="mr-2 d-lg-none font-weight-bold">Price:</span>
                         <span>{{item.price | currency:'USD':'symbol-narrow'}}</span>
                     </div>
-                    <div class="col-6 col-lg-1 text-lg-right">
+                    <div class="col-11 col-lg-1 offset-md-1 offset-lg-0  text-lg-right">
                         <span class="mr-2 d-lg-none font-weight-bold">Total:</span>
                         <span>{{item.price * item.quantity | currency:'USD':'symbol-narrow'}}</span>
                     </div>
-                    <div class="col-6 text-center col-lg-1">
+                    <div class="col-11 col-lg-1 offset-md-1 offset-lg-0 text-lg-center">
                         <span class="mr-2 d-lg-none font-weight-bold">Delete:</span>
-                        <i class="fa fa-trash-o"></i>
+                        <a (click)="deleteItem(order._id, item._id)">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
                     </div>
                     <div class="col-12 text-center">
                         <hr>
@@ -172,28 +174,28 @@
     </section>
     <section>
         <div class="row">
-            <div class="col col-lg-2 text-right offset-lg-5">
+            <div class="col-2 text-right offset-lg-5">
                 <span>Subtotal</span>
             </div>
-            <div class="col col-lg-2 text-right">
+            <div class="col-2 text-right">
                 <span class="font-weight-bold">
                     {{order.subtotal | currency:'USD':'symbol-narrow'}}
                 </span>
             </div>
         </div>
         <div class="row">
-            <div class="col col-lg-2 text-right offset-lg-5">
+            <div class="col-2 text-right offset-lg-5">
                 <span>Tax</span>
             </div>
-            <div class="col col-lg-2 text-right">
+            <div class="col-2 text-right">
                 <span class="font-weight-bold">
                     {{order.tax | currency:'USD':'symbol-narrow'}}
                 </span>
             </div>
         </div>
-        <div class="row">
-            <div class="col col-lg-2 text-right offset-lg-5"><span>Discount</span></div>
-            <div class="col col-lg-2 text-right">
+        <div class="row red">
+            <div class="col-2 text-right offset-lg-5"><span>Discount</span></div>
+            <div class="col-2 text-right">
                 <span id="discount" class="font-weight-bold">
                     {{order.discount | currency:'USD':'symbol-narrow'}}
                 </span>
@@ -205,8 +207,8 @@
             </div>
         </div>
         <div class="row pb-2" id="total-row">
-            <div class="col col-lg-2 text-right offset-lg-5"><span>Total</span></div>
-            <div class="col col-lg-2 text-right">
+            <div class="col-2 text-right offset-lg-5"><span>Total</span></div>
+            <div class="col-2 text-right">
                 <span class="font-weight-bold">
                     {{order.total | currency:'USD':'symbol-narrow'}}
                 </span>

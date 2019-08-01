@@ -226,10 +226,14 @@
                 </div>
                 <div class="col-12 mb-4 col-lg-6">
                     <label>CW (On back of card)</label>
-                    <input class="form-control" type="text" required maxlength="3" [(ngModel)]="order.customer.payment.cw" #cw="ngModel" name="cw">
+                    <input class="form-control" type="text" required minlength="3" maxlength="3" [(ngModel)]="order.customer.payment.cw" #cw="ngModel"
+                        name="cw">
                     <div *ngIf="cw.invalid && (cw.dirty || cw.touched)" class="error-color">
                         <div *ngIf="cw.errors.required">
                             CW is required
+                        </div>
+                        <div *ngIf="cw.errors.minlength">
+                            CW must be 3 digits
                         </div>
                     </div>
                 </div>
@@ -265,8 +269,7 @@
         </section>
         <section class="text-center">
             <div class="mt-4">
-                <button class="btn btn-primary place-order" id="go-to-bag" 
-                    type="button" (click)="placeOrder()" [disabled]="!checkoutForm.form.valid">
+                <button class="btn btn-primary place-order" id="go-to-bag" type="button" (click)="placeOrder()" [disabled]="!checkoutForm.form.valid">
                     PLACE ORDER
                 </button>
             </div>

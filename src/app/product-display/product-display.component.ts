@@ -4,6 +4,7 @@ import { ProductService } from '../product/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { MessageService } from '../shared/message/message/message.service';
 import { CartService } from '../cart/cart.service';
+import { ProductDisplayService } from './product-display.service';
 
 @Component({
   selector: 'app-product-display',
@@ -17,16 +18,20 @@ export class ProductDisplayComponent implements OnInit {
   private destination = "VIEW SHOPPING CART";
   private destinationIcon = "fa-cart-arrow-down";
   private link = '/cart';
-  
+  private quantities;
+  private quantity = 1;
+
   constructor(
     private productService:ProductService,
     private activatedRoute:ActivatedRoute,
     private messageService:MessageService,
-    private cartService:CartService
+    private cartService:CartService,
+    private productDisplayService:ProductDisplayService
   ) { }
 
   ngOnInit() {
     this.getProductById();
+    this.getQuantityData();
   }
 
   private getProductById() {
@@ -56,7 +61,7 @@ export class ProductDisplayComponent implements OnInit {
       }
     }    
 
-    this.cartService.addToCart(this.product, 1, this.size).subscribe(order => {
+    this.cartService.addToCart(this.product, this.quantity, this.size).subscribe(order => {
       console.log('Item added to cart')
       this.messageService.sendSuccess("Item added to your cart.")
       this.size = null;
@@ -64,4 +69,14 @@ export class ProductDisplayComponent implements OnInit {
     
   }
 
+
+  private getQuantityData() {
+    this.productDisplayService.getQuantityData().subscribe(quantities => {
+      this.quantities = quantities;
+    })
+  }
+
+  private showQuantity() {
+    console.log('quantity', this.quantity)
+  }
 }

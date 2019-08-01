@@ -6,7 +6,8 @@ import { ConfirmationComponent } from './confirmation.component';
 const routes: Routes = [
   {
     path: '',
-    component: ConfirmationComponent
+    component: ConfirmationComponent,
+    // data: { breadcrumb: 'Confirmation'}
   }
 ];
 

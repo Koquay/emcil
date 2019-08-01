@@ -19,7 +19,7 @@ export class OrderPickerComponent implements OnInit {
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
     private orderPickerService: OrderPickerService,
-    private router:Router
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -31,6 +31,7 @@ export class OrderPickerComponent implements OnInit {
 
     this.orderService.findOrder(orderNo).subscribe(order => {
       this.order = order;
+      console.log('findSelecedOrder ', this.order)
       this.getProductsForOrder(orderNo);
     })
   }
@@ -54,8 +55,19 @@ export class OrderPickerComponent implements OnInit {
 
   public setOrderStatus() {
     console.log('status', this.order.status);
+    if (this.order.order_items.length == 0) {
+      return;
+    }
     this.orderPickerService.setOrderStatus(this.order.order_no, this.order.status).subscribe(() => {
       this.router.navigate(['/pending-orders'])
+    })
+  }
+
+  private deleteItem(orderId, itemId) {
+    this.orderService.deleteItemFromOrder(orderId, itemId);
+    this.orderPickerService.getOrderTotals(this.order);
+    this.orderPickerService.deleteItemFromDB(this.order, itemId).subscribe(order => {
+      this.findSelectedOrder();
     })
   }
 

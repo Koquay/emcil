@@ -50,6 +50,7 @@ export class Customer {
 };
 
 export class OrderItem {
+    public _id: string;
     product_no: number;
     quantity: number;
     price: number;
@@ -61,6 +62,7 @@ export class OrderItem {
 }
 
 export class Order {
+    _id: string;
     order_no: number;
     order_date: Date;
     shipped: boolean;

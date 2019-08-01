@@ -6,7 +6,8 @@ import { ProductDisplayComponent } from './product-display.component';
 const routes: Routes = [
   {
     path: ':id',
-    component: ProductDisplayComponent
+    component: ProductDisplayComponent,
+    data: { breadcrumb: 'Product Display'}
   }
 ];
 

@@ -10,8 +10,8 @@ import { of } from 'rxjs';
 export class OrderService {
   private orderUrl = '/api/order/';
   private orderSearchUrl = '/api/order/search/';
-  private orderSearchedUrl = '/api/order/';  
-  private orders:Order[];
+  private orderSearchedUrl = '/api/order/';
+  private orders: Order[];
 
   constructor(
     private httpClient: HttpClient
@@ -68,5 +68,34 @@ export class OrderService {
         return;
       })
     )
+  }
+
+  public deleteItemFromOrder(orderId, itemId) {
+    console.log('*** deleteItemFromOrder ***')
+
+    let order = this.orders.find(order => order._id == orderId);
+    console.log('*** deleteItemFromOrder order ***', order)
+
+    if (order) {
+      let index = order.order_items.findIndex(item => item._id == itemId);
+
+      console.log('*** deleteItemFromOrder index ***', index)
+      if (index > -1) {
+        order.order_items.splice(index, 1);
+      }
+    }
+  }
+
+  public deleteOrder(orderId) {
+    console.log('*** deleteOrder ***')
+
+    let index = this.orders.findIndex(order => order._id == orderId);
+    console.log('*** deleteOrder order index ***', index)
+
+    if (index > -1) {
+      this.orders.splice(index, 1);
+    }
+
+    return of([])
   }
 }

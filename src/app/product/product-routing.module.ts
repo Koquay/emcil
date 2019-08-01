@@ -6,7 +6,8 @@ import { ProductComponent } from './product.component';
 const routes: Routes = [
   {
     path: ':product_type',
-    component: ProductComponent
+    component: ProductComponent,
+    data: { breadcrumb: 'Product'}
   }
 ];
 

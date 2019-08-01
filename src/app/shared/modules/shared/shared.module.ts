@@ -6,6 +6,7 @@ import { HeaderComponent } from '../../../header/header.component';
 import { FooterComponent } from '../../../footer/footer.component';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 import { MessageComponent } from '../../message/message/message.component';
+import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { MessageComponent } from '../../message/message/message.component';
     HeaderComponent, 
     FooterComponent,
     PageHeaderComponent,
-    MessageComponent
+    MessageComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { MessageComponent } from '../../message/message/message.component';
     HeaderComponent,
     FooterComponent,
     PageHeaderComponent,
-    MessageComponent
+    MessageComponent,
+    BreadcrumbComponent
   ]
 })
 export class SharedModule { }
