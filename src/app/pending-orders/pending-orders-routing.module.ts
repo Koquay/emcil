@@ -6,7 +6,8 @@ import { PendingOrdersComponent } from './pending-orders.component';
 const routes: Routes = [
   {
     path: '',
-    component: PendingOrdersComponent
+    component: PendingOrdersComponent,
+    data: { breadcrumb: 'Pending Orders'}
   }
 ];
 

@@ -37,16 +37,16 @@ export class Payment {
 }
 
 export class Customer {
-    shippingAndBillingSame:boolean = true;
+    shippingAndBillingSame: boolean = true;
     shipping_address: Address;
-    billing_address: Address;    
+    billing_address: Address;
     payment: Payment;
 
     constructor() {
         this.shipping_address = new Address();
-        this.billing_address = new Address();    
+        this.billing_address = new Address();
         this.payment = new Payment();
-    }    
+    }
 };
 
 export class OrderItem {
@@ -78,16 +78,25 @@ export class Order {
     order_items: OrderItem[] = [];
     special_instructions: string;
     status: string;
-    created_on:Date;    
+    created_on: Date;
 
     constructor() {
-        this.customer = new Customer();        
-    }    
+        this.customer = new Customer();
+    }
 }
 
 export class SearchCriteria {
     order_no: string;
     first_name: string;
-    last_name: string;      
+    last_name: string;
+}
+
+export class User {
+    constructor(
+        private email = 'admin@admin.com',
+        private password = 'admin',
+        private token = '',
+    ) {}
+
 }
 

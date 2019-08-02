@@ -20,7 +20,7 @@ export class CartGuard implements CanActivate {
       return true;
     }
 
-    const error = { error: 'You have no items in your cart yet.', status: 500 };
+    const error = { error: 'You have no items in your shopping cart yet.', status: 500 };
     this.messageService.sendErrorMessage(new HttpErrorResponse(error));
   }
 }

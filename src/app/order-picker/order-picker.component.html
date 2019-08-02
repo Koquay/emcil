@@ -13,7 +13,7 @@
         </div>
         <!-- <section class="mb-2"> -->
         <div class="row mb-3">
-            <div class="col-12 d-flex d-lg-flex align-items-baseline">
+            <div class="col-12 d-flex d-lg-flex align-items-baseline" *ngIf="order.status != 'S'">
                 <label class="mr-2">Pending:</label>
                 <input type="radio" name="order_status" (change)="setOrderStatus()" value="P" [(ngModel)]="order.status">
             </div>
@@ -44,7 +44,7 @@
                 </span>
             </div>
         </div>
-        <div class="row mb-3">
+        <div class="row mb-3" *ngIf="order.status != 'S'">
             <div class="col-12 d-flex d-lg-flex align-items-baseline">
                 <label class="mr-2">Cancelled:</label>
                 <input type="radio" name="order_status" [(ngModel)]="order.status" value="C" (change)="setOrderStatus()">
@@ -130,7 +130,7 @@
                     <h5>Total</h5>
                 </div>
                 <div class="col-1 text-center">
-                    <h5>Delete</h5>
+                    <h5 *ngIf="order.status != 'S'">Delete</h5>
                 </div>
             </div>
             <div class="row d-lg-flex justify-content-lg-center d-none d-lg-flex">
@@ -160,10 +160,12 @@
                         <span>{{item.price * item.quantity | currency:'USD':'symbol-narrow'}}</span>
                     </div>
                     <div class="col-11 col-lg-1 offset-md-1 offset-lg-0 text-lg-center">
-                        <span class="mr-2 d-lg-none font-weight-bold">Delete:</span>
-                        <a (click)="deleteItem(order._id, item._id)">
-                            <i class="fa fa-trash-o"></i>
-                        </a>
+                        <ng-container *ngIf="order.status != 'S'">
+                            <span class="mr-2 d-lg-none font-weight-bold">Delete:</span>
+                            <a (click)="deleteItem(order._id, item._id)">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </ng-container>
                     </div>
                     <div class="col-12 text-center">
                         <hr>

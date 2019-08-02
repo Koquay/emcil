@@ -93,3 +93,19 @@ header {
         }
     }
 }
+
+#myAccountModal {
+    h2 {
+        color: $secondary !important;
+    }
+
+    .btn {
+        background: $secondary !important;
+        font-size: 1.2rem;
+    }
+
+    .close {
+        color: $secondary !important;
+        font-size: 1.2rem !important;
+    }
+}

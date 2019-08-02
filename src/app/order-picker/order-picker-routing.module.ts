@@ -6,7 +6,8 @@ import { OrderPickerComponent } from './order-picker.component';
 const routes: Routes = [
   {
     path: ':orderNo',
-    component: OrderPickerComponent
+    component: OrderPickerComponent,
+    data: { breadcrumb: 'Order Picker'}
   }
 ];
 

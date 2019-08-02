@@ -7,6 +7,7 @@ import { FooterComponent } from '../../../footer/footer.component';
 import { PageHeaderComponent } from '../../components/page-header/page-header.component';
 import { MessageComponent } from '../../message/message/message.component';
 import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
   ],
   imports: [
     CommonModule,
-    SharedRoutingModule
+    SharedRoutingModule,
+    FormsModule
   ],
   exports: [
     HeaderComponent,
