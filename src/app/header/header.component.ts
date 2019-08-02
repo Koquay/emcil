@@ -11,14 +11,14 @@ import { UseExistingWebDriver } from 'protractor/built/driverProviders';
 })
 export class HeaderComponent implements OnInit {
   private isOverlay = false;
-  private credentials: {email:string, password:string, token:string}; 
+  // private credentials: {email:string, password:string, token:string}; 
   private user:User;
   
   constructor(
     private cartService:CartService,
     private userService:UserService
   ) {
-    this.credentials = {email: 'admin@admin.com', password: 'admin', token: ''};
+    // this.credentials = {email: 'admin@admin.com', password: 'admin', token: ''};
     this.user = new User();
    }
 
@@ -26,9 +26,7 @@ export class HeaderComponent implements OnInit {
   }
   
   private logIn() {
-    this.userService.logIn(this.user).subscribe(user => {
-
-    })
+    this.userService.login(this.user).subscribe();
   }
   private showOverlay() {
     console.log('SHOW OVERLAY')

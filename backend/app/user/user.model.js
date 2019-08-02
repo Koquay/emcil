@@ -4,7 +4,10 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        lowercase: true,
+        trim: true,
     },
     password: {
         type: String,
@@ -14,9 +17,13 @@ const UserSchema = new Schema({
         type: String,
     },
     created_on: {
-        type:Date,
+        type: Date,
         default: Date.now
-    }      
+    }
 });
 
-mongoose.model('User', UserSchema, 'user');
+UserSchema.methods.comparePassword = function (password) {
+    return bcrypt.compareSync(password, this.password);
+}
+
+mongoose.model('User', UserSchema);

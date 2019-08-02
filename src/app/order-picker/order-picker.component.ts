@@ -29,7 +29,7 @@ export class OrderPickerComponent implements OnInit {
   private findSelectedOrder() {
     let orderNo = this.activatedRoute.snapshot.paramMap.get('orderNo');
 
-    this.orderService.findOrder(orderNo).subscribe(order => {
+    this.orderService.findSelectedOrder(orderNo).subscribe(order => {
       this.order = order;
       console.log('findSelecedOrder ', this.order)
       this.getProductsForOrder(orderNo);

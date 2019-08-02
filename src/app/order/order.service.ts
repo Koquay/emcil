@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Order, SearchCriteria } from '../shared/models/data-model';
-import { tap, map } from 'rxjs/operators';
+import { tap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { MessageService } from '../shared/message/message/message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class OrderService {
   private orders: Order[];
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private messageService:MessageService
   ) { }
 
   public placeOrder(order: Order) {
@@ -25,16 +27,21 @@ export class OrderService {
     )
   }
 
-  public getOrders(status) {
+  public getOrdersByStatus(status) {
     return this.httpClient.get<Order[]>(`${this.orderUrl}${status}`).pipe(
       tap(orders => {
         console.log('orders', orders)
         this.orders = orders;
+      }),
+      catchError(error => {
+        console.log('error', error)
+        this.messageService.sendErrorMessage(error);
+        throw error;
       })
     )
   }
 
-  public findOrder(orderNo) {
+  public findSelectedOrder(orderNo) {
     let order = this.orders.find(order => order.order_no == orderNo);
 
     return of(order);
@@ -44,7 +51,12 @@ export class OrderService {
     let searchParams = this.buildSearchParams(searchCriteria);
 
     return this.httpClient.get<Order[]>(`${this.orderSearchUrl}${searchParams}`).pipe(
-      tap(orders => console.log('search orders', orders))
+      tap(orders => console.log('search orders', orders)),
+      catchError(error => {
+        console.log('error', error)
+        this.messageService.sendErrorMessage(error);
+        throw error;
+      })
     )
   }
 

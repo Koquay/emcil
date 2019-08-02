@@ -33,12 +33,12 @@ export class PendingOrdersComponent implements OnInit {
 
     // orderInterval.subscribe(() => {
     //   console.log('****** INTERVAL *********', new Date().getMinutes());
-    //   this.getOrders();
+    //   this.getOrdersByStatus();
     // })
   }
 
   private getPendingOrders() {
-    this.orderService.getOrders("P").subscribe(orders => {
+    this.orderService.getOrdersByStatus("P").subscribe(orders => {
       this.orders = orders;
     })
   }

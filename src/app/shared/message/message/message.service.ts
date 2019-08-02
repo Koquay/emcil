@@ -16,7 +16,7 @@ export class MessageService {
 
   public sendErrorMessage(error) {
     console.log('error', error)
-    let message = error.error || error.error.message;
+    let message = error.error.message || error.error
     let status = error.status || error.error.status;
     // let errorMessage = `Error: ${status} - ${message}`;
     let errorMessage = `${message}`;

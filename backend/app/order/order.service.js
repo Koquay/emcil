@@ -15,7 +15,7 @@ exports.post = async (newOrder) => {
     }
 }
 
-exports.get = async (status) => {
+exports.getOrdersByStatus = async (status) => {
     try {
         const orders = await Order.find({ status: status });
         console.log('orders', orders)
@@ -25,7 +25,7 @@ exports.get = async (status) => {
     }
 }
 
-exports.search = async (searchCriteria) => {
+exports.searchOrder = async (searchCriteria) => {
     let searchParams = JSON.parse(searchCriteria);
 
     let aggregatePipeline = buildAggregatePipeline(searchParams);
@@ -93,7 +93,7 @@ exports.getProductsForOrder = async (prodNos) => {
     }
 }
 
-exports.setStatus = async (orderInfo) => {
+exports.setOrderStatus = async (orderInfo) => {
     console.log('orderInfo.status', orderInfo.status)
     let date = moment.tz('America/Toronto').format('YYYY-MM-DD hh:mm A');
 
@@ -140,7 +140,7 @@ exports.deleteItem = async (order, itemId) => {
                 }
             },
             { new: true });
-            
+
         if (newOrder.order_items.length == 0) {
             this.deleteOrder(newOrder._id);
             return null;

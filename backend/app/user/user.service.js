@@ -1,10 +1,75 @@
 require('./user.model');
 const User = require('mongoose').model('User');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const chalk = require('chalk');
+
+exports.register = async (user) => {
+    try {
+        let newUser = new User(user);
+        newUser.password = bcrypt.hashSync(user.password, 10);
+        console.log('newUser', newUser)
+        await newUser.save();
+        delete user.password;
+        user.token = jwt.sign({ email: user.email }, process.env.SECRET, { expiresIn: 3600 });
+        console.log('user', user)
+        return user;
+
+    } catch (error) {
+        throw error;
+    }
+};
 
 exports.login = async (user) => {
     try {
-        console.log('user', user.email)
-    } catch(error) {
+        let existingUser = await User.findOne({ email: user.email });
+
+        if (existingUser == null) {
+            let error = new Error()
+            error.message = 'Login failure 1! Please try again with correct crdentials.'
+            error.status = 401;
+            throw error;
+        }
+
+        if(await bcrypt.compare(user.password, existingUser.password) == false) {
+            let error = new Error()
+            error.message = 'Login failure 2! Please try again with correct crdentials.'
+            error.status = 401;
+            throw error
+        }
+
+
+        user.token = await jwt.sign({ email: user.email }, process.env.SECRET, { expiresIn: 3600 });
+        delete user.password;
+        console.log('user service user ', user)
+        return user;
+    } catch (error) {
         throw error;
     }
 }
+
+exports.authenticate = async (req, res, next) => {
+    let bearer = JSON.parse(req.headers.authorization.substr(7));
+    const token = bearer.user.token;
+    // const token = null;;
+    console.log('bearer.token', token)
+
+    if (token) {
+        try {
+            console.log('SECRET', process.env.SECRET)
+            await jwt.verify(token, process.env.SECRET);
+            console.log(chalk.blue('TOKEN VERIFIED'));
+            return;
+        } catch (error) {
+            error.message = 'There is a problem. Please log in to proceed.';
+            error.status = '500';
+            throw error;
+        }
+    } else {
+        let error = new Error();
+        error.message = 'There is a problem. Please log in to proceed.';
+        error.status = '500';
+        throw error;
+    }
+}
+

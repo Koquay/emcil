@@ -93,8 +93,8 @@ export class SearchCriteria {
 
 export class User {
     constructor(
-        private email = 'admin@admin.com',
-        private password = 'admin',
+        private email = 'emcilfashion@yahoo.com',
+        private password = 'emcil',
         private token = '',
     ) {}
 

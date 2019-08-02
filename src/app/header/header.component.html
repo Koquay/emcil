@@ -56,10 +56,10 @@
                                 <a class="nav-link" [routerLink]="['/checkout']">CHECKOUT</a>
                             </li>
                             <!-- <li class="nav-item" role="presentation"><a class="nav-link" >TRACK ORDER</a></li> -->
-                            <li class="nav-item" role="presentation">
+                            <li class="nav-item" role="presentation" *ngIf="userService.isLoggedIn">
                                 <a class="nav-link" [routerLink]="['/pending-orders']">PENDING ORDERS</a>
                             </li>
-                            <li class="nav-item" role="presentation">
+                            <li class="nav-item" role="presentation"  *ngIf="!userService.isLoggedIn">
                                 <a class="nav-link" data-toggle="modal" data-target="#myAccountModal">
                                     <i class="fa fa-user"></i>
                                     LOG IN

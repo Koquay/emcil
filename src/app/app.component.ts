@@ -9,6 +9,7 @@ export class AppComponent {
   title = 'emcil';
 
   constructor() {
+    localStorage.removeItem('user')
     localStorage.removeItem('breadcrumbs')
     let breadcrumbs = [{breadcrumb: 'Home', url: '/home'}];
     localStorage.setItem('breadcrumbs', JSON.stringify(breadcrumbs)) 
