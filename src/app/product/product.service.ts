@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {tap} from 'rxjs/operators'
+import {tap, catchError} from 'rxjs/operators'
 import { Product } from '../shared/models/data-model';
 import { Observable, of } from 'rxjs';
+import { MessageService } from '../shared/message/message/message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class ProductService {
   private products:Product[] = [];
 
   constructor(
-    private httpClient:HttpClient
+    private httpClient:HttpClient,
+    private messageService:MessageService
   ) { }
 
   public getProductsByType(type) : Observable<Product[]> {
@@ -26,6 +28,11 @@ export class ProductService {
       tap(products => {
         console.log('products', products)
         this.products = [...this.products, ...products];
+      }),
+      catchError(error => {
+        console.log('error', error)
+        this.messageService.sendErrorMessage(error);
+        throw error;
       })
     )
   }

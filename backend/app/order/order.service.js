@@ -10,7 +10,10 @@ exports.post = async (newOrder) => {
         console.log('order', order)
         order.save();
         return order;
-    } catch (error) {
+    } catch (error1) {
+        let error = new Error();
+        error.message = 'There is a problem placing your order. Please try again or contact IT Department.';
+        error.status = '500';
         throw error;
     }
 }
@@ -20,7 +23,10 @@ exports.getOrdersByStatus = async (status) => {
         const orders = await Order.find({ status: status });
         console.log('orders', orders)
         return orders;
-    } catch (error) {
+    } catch (errorx) {
+        let error = new Error();
+        error.message = 'There is a problem getting orders by status. Please try again or contact IT Department.';
+        error.status = '500';
         throw error;
     }
 }
@@ -35,7 +41,10 @@ exports.searchOrder = async (searchCriteria) => {
         const orders = await Order.aggregate(aggregatePipeline);
         console.log('orders', orders)
         return orders;
-    } catch (error) {
+    } catch (errorx) {
+        let error = new Error();
+        error.message = 'There is a problem searching for orders. Please try again or contact IT Department.';
+        error.status = '500';
         throw error;
     }
 }
@@ -88,7 +97,10 @@ exports.getProductsForOrder = async (prodNos) => {
         const products = await Product.find({ product_no: { $in: prodNos } });
         console.log('products', products)
         return products;
-    } catch (error) {
+    } catch (errox) {
+        let error = new Error();
+        error.message = 'There is a problem getting productss for orders. Please try again or contact IT Department.';
+        error.status = '500';
         throw error;
     }
 }
@@ -112,7 +124,10 @@ exports.setOrderStatus = async (orderInfo) => {
         }
 
         return [];
-    } catch (error) {
+    } catch (errorx) {
+        let error = new Error();
+        error.message = 'There is a problem setting order status. Please try again or contact IT Department.';
+        error.status = '500';
         throw error;
     }
 }
@@ -122,7 +137,10 @@ exports.getSearchedOrder = async (orderNo) => {
         const order = await Order.findOne({ order_no: orderNo });
         console.log('order', order)
         return order;
-    } catch (error) {
+    } catch (errorx) {
+        let error = new Error();
+        error.message = 'Cannot get searched order. Please try again or contact IT Department.';
+        error.status = '500';
         throw error;
     }
 }
@@ -146,7 +164,10 @@ exports.deleteItem = async (order, itemId) => {
             return null;
         }
         return newOrder;
-    } catch (error) {
+    } catch (errorx) {
+        let error = new Error();
+        error.message = 'Problem deleting item. Please try again or contact IT Department.';
+        error.status = '500';
         throw error;
     }
 }
@@ -155,7 +176,10 @@ exports.deleteOrder = async (orderId) => {
     try {
         await Order.deleteOne({ _id: orderId });
         return [];
-    } catch (error) {
+    } catch (errorx) {
+        let error = new Error();
+        error.message = 'Problem deleting order. Please try again or contact IT Department.';
+        error.status = '500';
         throw error;
     }
 }

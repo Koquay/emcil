@@ -1,5 +1,6 @@
 const chalk = require('chalk');
 const ProductService = require('./product.service');
+const ErrorHandler = require('../error/error-handler');
 
 exports.getByProductType = async(req, res) => {
     console.log(chalk.blue('*** ProdctController called ***'));        
@@ -11,6 +12,6 @@ exports.getByProductType = async(req, res) => {
         res.status(200).json(products);
         return;
     } catch(error) {
-        throw error;
+        return ErrorHandler.handleError('PRODUCT BY TYPE ERROR', res, error);
     }
 }

@@ -15,8 +15,11 @@ exports.register = async (user) => {
         console.log('user', user)
         return user;
 
-    } catch (error) {
-        throw error;
+    } catch (errorX) {
+        let error = new Error()
+        error.message = 'Registration failure! Please try again with correct crdentials.'
+        error.status = 401;
+        throw error
     }
 };
 
@@ -31,7 +34,7 @@ exports.login = async (user) => {
             throw error;
         }
 
-        if(await bcrypt.compare(user.password, existingUser.password) == false) {
+        if (await bcrypt.compare(user.password, existingUser.password) == false) {
             let error = new Error()
             error.message = 'Login failure 2! Please try again with correct crdentials.'
             error.status = 401;
@@ -43,14 +46,28 @@ exports.login = async (user) => {
         delete user.password;
         console.log('user service user ', user)
         return user;
-    } catch (error) {
-        throw error;
+    } catch (errorX) {
+        let error = new Error()
+        error.message = 'Login failure 3! Please try again with correct crdentials.'
+        error.status = 401;
+        throw error
     }
 }
 
 exports.authenticate = async (req, res, next) => {
-    let bearer = JSON.parse(req.headers.authorization.substr(7));
-    const token = bearer.user.token;
+    let bearer;
+    let token;
+
+    try {
+        bearer = JSON.parse(req.headers.authorization.substr(7));
+        token = bearer.user.token;
+    } catch (errorx) {
+        let error = new Error();
+        error.message = 'There is a problem. Please log in to proceed.';
+        error.status = '500';
+        throw error;
+    }
+
     // const token = null;;
     console.log('bearer.token', token)
 
@@ -60,7 +77,8 @@ exports.authenticate = async (req, res, next) => {
             await jwt.verify(token, process.env.SECRET);
             console.log(chalk.blue('TOKEN VERIFIED'));
             return;
-        } catch (error) {
+        } catch (errorx) {
+            let error = new Error();
             error.message = 'There is a problem. Please log in to proceed.';
             error.status = '500';
             throw error;

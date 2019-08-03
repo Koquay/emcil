@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product, Order } from '../shared/models/data-model';
-import { tap } from 'rxjs/operators';
+import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { MessageService } from '../shared/message/message/message.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,21 +15,32 @@ export class OrderPickerService {
   private order:Order;
   
   constructor(
-    private httpClient:HttpClient
+    private httpClient:HttpClient,
+    private messageService:MessageService
   ) { }
 
   public getProductsForOrder(orderNo, prodNos) {
       let prodNosStr =JSON.stringify(prodNos)
       return this.httpClient.get<Product[]>(`${this.orderProductUrl}${orderNo}?prodNos=${prodNosStr}`)
       .pipe(
-        tap(products => {console.log('products', products)})
+        tap(products => {console.log('products', products)}),
+        catchError(error => {
+          console.log('error', error)
+          this.messageService.sendErrorMessage(error);
+          throw error;
+        })
       )
   }
 
   public setOrderStatus(orderNo, status) {
     return this.httpClient.post(this.orderStatusUrl, {orderNo:orderNo, status:status})
     .pipe(
-      tap(orders => {console.log('orders', orders)})
+      tap(orders => {console.log('orders', orders)}),
+      catchError(error => {
+        console.log('error', error)
+        this.messageService.sendErrorMessage(error);
+        throw error;
+      })
     )
   }
 
@@ -36,7 +48,12 @@ export class OrderPickerService {
     console.log('order to delete from DB', order)
     return this.httpClient.post<Order>(this.itemDeleteUrl, {order:order, itemId:itemId})
     .pipe(
-      tap(order => console.log('order after delete', order))
+      tap(order => console.log('order after delete', order)),
+      catchError(error => {
+        console.log('error', error)
+        this.messageService.sendErrorMessage(error);
+        throw error;
+      })
     )
   }
 

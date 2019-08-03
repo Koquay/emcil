@@ -1,4 +1,5 @@
 const OrderService = require('./order.service');
+const ErrorHandler = require('../error/error-handler');
 
 exports.post = async (req, res) => {
     console.log('*** Order Controller ***');
@@ -8,7 +9,7 @@ exports.post = async (req, res) => {
         res.status(201).json(order);
         return;
     } catch(error) {
-        throw error;
+        return ErrorHandler.handleError('ORDER POSTING ERROR', res, error);
     }    
 }
 
@@ -21,7 +22,7 @@ exports.getOrdersByStatus = async (req, res) => {
         res.status(200).json(orders);
         return;
     } catch(error) {
-        throw error;
+        return ErrorHandler.handleError('ORDER BY STATUS ERROR', res, error);
     }    
 }
 
@@ -34,7 +35,7 @@ exports.searchOrder = async (req, res) => {
         res.status(200).json(orders);
         return;
     } catch(error) {
-        throw error;
+        return ErrorHandler.handleError('ORDER SEARCH ERROR', res, error);
     }    
 }
 
@@ -48,7 +49,7 @@ exports.getProductsForOrder = async (req, res) => {
         res.status(200).json(products);
         return;
     } catch(error) {
-        throw error;
+        return ErrorHandler.handleError('PRODUCTS FOR ORDER ERROR', res, error);
     }    
 }
 
@@ -58,7 +59,7 @@ exports.setOrderStatus = async(req, res) => {
         const orders = OrderService.setOrderStatus(req.body);
         return res.json([]);
     } catch(error) {
-        throw error;
+        return ErrorHandler.handleError('ORDER STUTUS ERROR', res, error);
     }
 }
 
@@ -71,7 +72,7 @@ exports.getSearchedOrder = async (req, res) => {
         res.status(200).json(order);
         return;
     } catch(error) {
-        throw error;
+        return ErrorHandler.handleError('SEARCH ORDER ERROR', res, error);
     }    
 }
 
@@ -84,6 +85,6 @@ exports.deleteItem = async (req, res) => {
         const order = await OrderService.deleteItem(req.body.order, req.body.itemId);
         return res.status(201).json(order);
     } catch(error) {
-        throw error;
+        return ErrorHandler.handleError('DELETE ITEM ERROR', res, error);
     }    
 }

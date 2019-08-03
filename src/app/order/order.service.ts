@@ -23,6 +23,11 @@ export class OrderService {
     return this.httpClient.post<Order>(this.orderUrl, { order: order }).pipe(
       tap(order => {
         console.log('order', order)
+      }),
+      catchError(error => {
+        console.log('error', error)
+        this.messageService.sendErrorMessage(error);
+        throw error;
       })
     )
   }
@@ -78,6 +83,11 @@ export class OrderService {
         console.log('getSearchedOrder', order);
         this.orders.push(order);
         return;
+      }),
+      catchError(error => {
+        console.log('error', error)
+        this.messageService.sendErrorMessage(error);
+        throw error;
       })
     )
   }
