@@ -1,16 +1,6 @@
-// $primary: #b0bec5; 
-// $secondary: #808e95;
-// $tertiary: #e2f1f8;
-
 $primary: #0277bd; 
 $secondary: #004c8c;
 $tertiary: #58a5f0;
-
-// $primary: #82b1ff; 
-// $secondary: #4d82cb;
-// $tertiary: #b6e3ff;
-
-
 
 .navbar {
     background: $secondary;
@@ -27,7 +17,7 @@ footer {
     
     @media(min-width: 768px) {
         .footer-col {
-            min-width: 397px;
+            // min-width: 397px;
         }
     }
     
