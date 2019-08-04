@@ -25,7 +25,10 @@ footer {
     background: #004c8c;
     color: white;
     
-    .footer-col {
-        min-width: 397px;
+    @media(min-width: 768px) {
+        .footer-col {
+            min-width: 397px;
+        }
     }
+    
 }
