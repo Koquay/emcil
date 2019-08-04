@@ -104,7 +104,7 @@ const buildFirstNameMatch = (firstName) => {
 }
 
 function buildSortMatch() {
-    return { $sort: { order_date: 1 } };
+    return { $sort: { created_on: -1 } };
 }
 
 exports.getProductsForOrder = async (prodNos) => {

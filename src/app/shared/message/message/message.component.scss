@@ -1,7 +1,9 @@
-$primary: #a30000; 
-$secondary: #dd2c00;
-$tertiary: #ff6434;
-$gray: #f7f7f7;
+
+$primary: #0277bd; 
+$secondary: #004c8c;
+$tertiary: #58a5f0;
+$button-blue: #4d82cb;;
+$modal-success-background: #b6e3ff;
 
 .row {
     // background-color: #f2b8b8;
@@ -14,17 +16,32 @@ i {
     font-weight: bold;
 }
 
-.alertDangerClass {
-    background-color: #f2b8b8;
-    color: red;
-}
+// .alertDangerClass {
+//     background-color: #f2b8b8;
+//     color: red;
+// }
 
 .alertSuccessClass {
-    background-color: $tertiary;
-    color: blue;
+    background-color: $modal-success-background;
+    color: $secondary;
 }
 
+.alertDangerClass,
 .alertInfoClass {
     background-color: #f2b8b8;
-    color: blue;
+    color: $secondary;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.f-2 {
+    font-size: 2rem;
+}
+
+.modal {
+    button {
+        background: #0277bd;
+    }
 }
