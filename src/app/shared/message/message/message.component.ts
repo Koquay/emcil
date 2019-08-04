@@ -13,7 +13,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class MessageComponent implements OnInit {
   private alert: Alert = null;
   private disableAlert = timer(15000);
-  private messageClick: HTMLElement;
   @ViewChild('openMessage', { static: true }) openMessage: ElementRef<HTMLElement>;
 
   constructor(
@@ -22,9 +21,6 @@ export class MessageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const error = { error: 'You have no items in your shopping cart yet.', status: 500 };
-    this.messageService.sendErrorMessage(new HttpErrorResponse(error));
-
     this.getAlert();
   }
 
