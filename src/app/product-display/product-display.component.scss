@@ -15,6 +15,10 @@ $button-blue: #4d82cb;;
             margin-right: .5rem;
             width: 2.6rem;
             border-radius: 0;
+
+            &:hover {
+                background: $button-blue;
+            }
         }
     }
        
@@ -27,6 +31,10 @@ $button-blue: #4d82cb;;
         background: $primary;
         font-weight: bold;
         padding: .5rem;
+
+        &:hover {
+            background: $button-blue;
+        }
     }
 
     .fa-cart-arrow-down { 

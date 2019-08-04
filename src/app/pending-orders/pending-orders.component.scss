@@ -29,6 +29,10 @@ $tertiary: #58a5f0;
             background: $secondary;
             padding: .4rem 2.2rem;
             font-weight: bold;
+
+            &:hover {
+                background: $primary;
+            }
         }
     }
     

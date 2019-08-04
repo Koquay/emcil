@@ -46,7 +46,7 @@
                     </span>
                 </div>
                 <div class="col-6 col-lg-2">
-                    <span>{{order.customer.shipping_address.phone}}</span>
+                    <span>{{order.customer.shipping_address.phone | mask: '(000) 000-0000'}}</span>
                 </div>
                 <div class="col-12">
                     <hr>
@@ -67,22 +67,16 @@
                         <input class="form-control" type="text" name="order_no" [(ngModel)]="searchCriteria.order_no">
                     </div>
                 </div>
-                <!-- <div class="form-row px-4">
-                    <div class="col-12 col-md-4 col-lg-2 offset-lg-1 mb-2 form-label">
-                        <label class="col-form-label">First Name:<br></label>
+                <div class="form-row px-4 mb-2 mb-md-0">
+                    <div class="col-12 col-md-4 col-lg-2 offset-lg-1 form-label">
+                        <label class="col-form-label">Phone:</label>
                     </div>
-                    <div class="col-12 col-md-4 col-lg-2">
-                        <input class="form-control" type="text" name="first_name" [(ngModel)]="searchCriteria.first_name">
+                    <div class="col-12 col-md-4 col-lg-2 mb-2">
+                        <input class="form-control" type="text" name="phone" [(ngModel)]="searchCriteria.phone" 
+                            mask="(000) 000-0000" maxlength="14">
                     </div>
                 </div>
-                <div class="form-row px-4">
-                    <div class="col-12 col-md-4 col-lg-2 offset-lg-1 mb-2 form-label">
-                        <label class="col-form-label">Last Name:<br></label>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-2">
-                        <input class="form-control" type="text" name="last_name" [(ngModel)]="searchCriteria.last_name">
-                    </div>
-                </div> -->
+
                 <div class="form-row text-left px-4">
                     <div class="col-12 text-left offset-md-4 offset-lg-3 col-md-8">
                         <div class="text-left" id="search">
@@ -104,6 +98,9 @@
                 </div>
                 <div class="col-2">
                     <h5>Phone</h5>
+                </div>
+                <div class="col-2 col-lg-1">
+                    <h5>Status</h5>
                 </div>
             </div>
             <div class="row d-none d-lg-flex">
@@ -131,30 +128,16 @@
                     </span>
                 </div>
                 <div class="col-6 col-lg-2">
-                    <span>{{order.customer.shipping_address.phone}}</span>
+                    <span>{{order.customer.shipping_address.phone | mask: '(000) 000-0000'}}</span>
+                </div>
+                <div class="col-2 col-lg-1 text-left text-lg-center">
+                    <span>{{order.status}}</span>
                 </div>
                 <div class="col-12">
                     <hr>
                 </div>
             </div>
         </section>
-        <!-- <section class="text-center mt-2">
-            <div class="row text-center">
-                <div class="col text-center d-md-flex justify-content-md-center">
-                    <nav>
-                        <ul class="pagination">
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item"><a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">»</span></a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </section> -->
     </section>
 </div>
 <app-footer></app-footer>

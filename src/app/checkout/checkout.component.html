@@ -37,7 +37,9 @@
                 <div class="form-row">
                     <div class="col-12 col-lg-6 mb-4">
                         <label>Phone</label>
-                        <input class="form-control" type="text" required [(ngModel)]="order.customer.shipping_address.phone" #phone="ngModel" name="phone">
+                        <input class="form-control" type="text" required 
+                            [(ngModel)]="order.customer.shipping_address.phone" #phone="ngModel" name="phone"
+                            mask="(000) 000 0000">
                         <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error-color">
                             <div *ngIf="phone.errors.required">
                                 Phone is required
@@ -46,7 +48,7 @@
                     </div>
                     <div class="col-12 col-lg-6 mb-4">
                         <label>Email</label>
-                        <input class="form-control" type="text" required [(ngModel)]="order.customer.shipping_address.email" #email="ngModel" name="email">
+                        <input class="form-control" type="email" required [(ngModel)]="order.customer.shipping_address.email" #email="ngModel" name="email">
                         <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-color">
                             <div *ngIf="email.errors.required">
                                 Email is required
@@ -136,7 +138,8 @@
                 <div class="form-row">
                     <div class="col-12 col-lg-6 mb-4">
                         <label>Phone</label>
-                        <input class="form-control" type="text" required [(ngModel)]="order.customer.billing_address.phone" #phone="ngModel" name="phone">
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.billing_address.phone" #phone="ngModel" name="phone"
+                            mask="(000) 000 0000" maxlength="10">
                         <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error-color">
                             <div *ngIf="phone.errors.required">
                                 Phone is required
@@ -145,7 +148,7 @@
                     </div>
                     <div class="col-12 col-lg-6 mb-4">
                         <label>Email</label>
-                        <input class="form-control" type="text" required [(ngModel)]="order.customer.billing_address.email" #email="ngModel" name="email">
+                        <input class="form-control" type="email" required [(ngModel)]="order.customer.billing_address.email" #email="ngModel" name="email">
                         <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-color">
                             <div *ngIf="email.errors.required">
                                 Email is required
@@ -218,7 +221,7 @@
                 <div class="col-12 col-lg-6 mb-4">
                     <label>Card Number</label>
                     <input class="form-control" type="text" required [(ngModel)]="order.customer.payment.credit_card_no" #credit_card_no="ngModel"
-                        name="credit_card_no">
+                        name="credit_card_no" mask="0000 0000 0009 0000">
                     <div *ngIf="credit_card_no.invalid && (credit_card_no.dirty || credit_card_no.touched)" class="error-color">
                         <div *ngIf="credit_card_no.errors.required">
                             Credit Card Number is required

@@ -68,8 +68,7 @@ export class OrderService {
   private buildSearchParams(searchCriteria) {
     let searchParams = JSON.stringify({
       order_no: searchCriteria.order_no,
-      first_name: searchCriteria.first_name,
-      last_name: searchCriteria.last_name,
+      phone: searchCriteria.phone,      
     });
 
     const params = `?searchCriteria=${searchParams}`

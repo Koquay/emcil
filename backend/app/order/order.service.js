@@ -50,7 +50,7 @@ exports.searchOrder = async (searchCriteria) => {
 }
 
 const buildAggregatePipeline = (searchParams) => {
-    let { order_no, first_name, last_name } = searchParams;
+    let { order_no, phone } = searchParams;
     console.log('order_no', order_no)
 
     let aggregatePipeline = [];
@@ -60,11 +60,12 @@ const buildAggregatePipeline = (searchParams) => {
         aggregatePipeline.push(orderNoMatch);
     }
 
-    // let firstNameMatch = buildFirstNameMatch(first_name);
-    // if(firstNameMatch) {
-    //     aggregatePipeline.push(firstNameMatch);
-    // }
+    let phoneMatch = buildPhoneMatch(phone);
+    if (phoneMatch) {
+        aggregatePipeline.push(phoneMatch);
+    }
 
+    aggregatePipeline.push(buildSortMatch());
     checkForEmptyAggregate(aggregatePipeline);
 
     return aggregatePipeline;
@@ -77,8 +78,18 @@ function checkForEmptyAggregate(aggregatePipeline) {
 }
 
 const buildOrderNoMatch = (orderNo) => {
-    if (orderNo && orderNo.length) {
-        return { $match: { order_no: { $eq: +orderNo } } }
+    if (orderNo && orderNo.trim().length) {
+        return { $match: { order_no: { $eq: +orderNo.trim() } } }
+    }
+
+    return null;
+}
+
+const buildPhoneMatch = (phone) => {
+    if (phone && phone.trim().length) {
+        let match = { $match: { "customer.shipping_address.phone": { $eq: phone.trim() } } }
+        console.log('phone match', match)
+        return match;
     }
 
     return null;
@@ -90,6 +101,10 @@ const buildFirstNameMatch = (firstName) => {
     }
 
     return null;
+}
+
+function buildSortMatch() {
+    return { $sort: { order_date: 1 } };
 }
 
 exports.getProductsForOrder = async (prodNos) => {

@@ -87,8 +87,7 @@ export class Order {
 
 export class SearchCriteria {
     order_no: string;
-    first_name: string;
-    last_name: string;
+    phone: string;
 }
 
 export class User {

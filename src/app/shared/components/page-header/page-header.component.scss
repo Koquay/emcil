@@ -9,6 +9,9 @@ $button-blue: #4d82cb;;
     font-weight: bold;
     min-width: 13.7rem;
     text-align: center !important;
+    &:hover {
+        background: $button-blue;
+    }
 }
 
 .page-heading {

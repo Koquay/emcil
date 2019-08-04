@@ -3,6 +3,7 @@ $primary: #0277bd;
 $secondary: #004c8c;
 $tertiary: #58a5f0; 
 $red: #a30000; 
+$button-blue: #4d82cb;;
 
 #checkout {
     form {
@@ -27,6 +28,10 @@ $red: #a30000;
         .place-order {
             font-weight: bold;     
             padding: .5rem 2rem;
+
+            &:hover {
+                background: $primary;
+            }
         }
         
         select,

@@ -6,6 +6,9 @@ import { PendingOrdersComponent } from './pending-orders.component';
 import { SharedModule } from '../shared/modules/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 
+import {NgxMaskModule, IConfig} from 'ngx-mask';
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
+
 
 @NgModule({
   declarations: [PendingOrdersComponent],
@@ -13,7 +16,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     PendingOrdersRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxMaskModule.forRoot(options),
   ]
 })
 export class PendingOrdersModule { }
