@@ -125,13 +125,13 @@ input[type="checkbox"] {
     }  
 
     .view-height {
-        min-height: 76vh;
+        min-height: 70vh;
       }
 }
 
 @media(min-width: 992px) {
     .view-height {
-        min-height: 78vh;
+        // min-height: 50vh;
       }
 }
 

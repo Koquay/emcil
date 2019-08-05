@@ -13,12 +13,5 @@ $tertiary: #58a5f0;
 
 footer {
     background: #004c8c;
-    color: white;
-    
-    @media(min-width: 768px) {
-        .footer-col {
-            // min-width: 397px;
-        }
-    }
-    
+    color: white;    
 }

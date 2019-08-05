@@ -35,6 +35,7 @@ export class CheckoutComponent implements OnInit {
   private getOrder() {
     this.cartService.getOrder().subscribe(order => {
       this.order = order;
+      console.log('order from cartService', this.order)
     })
   }
 
@@ -46,6 +47,7 @@ export class CheckoutComponent implements OnInit {
     this.orderService.placeOrder(this.order).subscribe(order => {
       let newOrder = JSON.parse(JSON.stringify(order));
       this.confirmationService.setOrder(newOrder);
+      this.resetOrder();
       this.router.navigate(['/confirmation']);
     })
   }
@@ -56,5 +58,13 @@ export class CheckoutComponent implements OnInit {
       this.expYears = data[1];      
     })
   }
+
+  private resetOrder() {
+    this.order = null;
+    console.log('order after nulled', this.order)
+    // this.cartService.resetOrder();
+    // this.getOrder();
+  }
+
 
 }

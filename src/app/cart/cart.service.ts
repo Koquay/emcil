@@ -68,4 +68,8 @@ export class CartService {
 
       return this.getOrder();
   }
+
+  public resetOrder() {
+    this.order = null;
+  }
 }
