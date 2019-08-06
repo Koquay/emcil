@@ -75,44 +75,19 @@
     <section id="complete-look" class="mt-5">
         <div class="row">
             <div class="col text-center">
-                <h4>COMPLETE THE LOOK</h4>
+                <h4>YOU MIGHT ALSO LIKE</h4>
             </div>
         </div>
         <div class="row">
-            <div class="col-6 col-lg-2">
-                <div class="card"><img class="img-fluid card-img-top w-100 d-block" src="assets/img/18340142.jpg">
-                    <div class="card-body text-center">
-                        <h6 class="card-title">Dianne Breeze</h6><span>$59</span></div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-2">
-                <div class="card"><img class="img-fluid card-img-top w-100 d-block" src="assets/img/18340148.jpg">
-                    <div class="card-body text-center">
-                        <h6 class="card-title">Dianne Breeze</h6><span>$59</span></div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-2">
-                <div class="card"><img class="img-fluid card-img-top w-100 d-block" src="assets/img/18340161.jpg">
-                    <div class="card-body text-center">
-                        <h6 class="card-title">Dianne Breeze</h6><span>$59</span></div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-2">
-                <div class="card"><img class="img-fluid card-img-top w-100 d-block" src="assets/img/18340168.jpg">
-                    <div class="card-body text-center">
-                        <h6 class="card-title">Dianne Breeze</h6><span>$59</span></div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-2">
-                <div class="card"><img class="img-fluid card-img-top w-100 d-block" src="assets/img/18340227.jpg">
-                    <div class="card-body text-center">
-                        <h6 class="card-title">Dianne Breeze</h6><span>$59</span></div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-2">
-                <div class="card"><img class="img-fluid card-img-top w-100 d-block" src="assets/img/18340142.jpg">
-                    <div class="card-body text-center">
-                        <h6 class="card-title">Dianne Breeze</h6><span>$59</span></div>
+            <div class="col-6 col-lg-2" *ngFor="let product of similarProducts">
+                <div class="card">
+                    <a [routerLink]="['/product-display', product._id]">
+                        <img class="img-fluid card-img-top w-100 d-block" src="assets/img/{{product.images[0]}}">
+                        <div class="card-body text-center">
+                            <h6 class="card-title">{{product.name}}</h6>
+                            <span>{{product.price | currency:'USD':'symbol-narrow'}}</span>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>

@@ -42,7 +42,6 @@ export class UserService {
     // const source = timer(5000);
 
     const subscribe = source.subscribe(val => {
-      console.log('******** timer login out now')
       localStorage.removeItem('user');
       this.isLoggedIn = false;
     });

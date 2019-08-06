@@ -13,6 +13,7 @@ import { ProductDisplayService } from './product-display.service';
 })
 export class ProductDisplayComponent implements OnInit {
   private product:Product;
+  private similarProducts:Product[];
   private displayImage;
   private size = null;
   private destination = "VIEW SHOPPING CART";
@@ -40,6 +41,7 @@ export class ProductDisplayComponent implements OnInit {
     this.productService.getProductById(id).subscribe(product => {
       this.product = product;
       this.displayImage = this.product.images[0];
+      this.getSimilarProducts();
       console.log('product', product)
     })    
   }
@@ -78,5 +80,12 @@ export class ProductDisplayComponent implements OnInit {
 
   private showQuantity() {
     console.log('quantity', this.quantity)
+  }
+
+  private getSimilarProducts() {
+    this.productService.getSimilarProducts(this.product.product_no, this.product.product_type)
+    .subscribe(products => {
+      this.similarProducts = products;
+    })
   }
 }
