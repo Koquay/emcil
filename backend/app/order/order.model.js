@@ -38,7 +38,10 @@ const OrderItemSchema = new Schema({
 });
 
 const OrderSchema = new Schema({
-    order_no: Number,
+    order_no: {
+        type: Number,
+        unique: true
+    },
     order_date: Date,
     shipped: Boolean,
     shipped_date: Date,

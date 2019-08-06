@@ -34,11 +34,11 @@ export class HomeService {
     this.categories = {
       cards: [
         {title: "Dresses", img: '18182204.jpg', product_type:'dresses'},
-        {title: "Women's Shoes", img: '18340227.jpg', product_type:"women's shoes"},
-        {title: 'Handbags', img: '19061780.jpg', product_type:'handbags'},
-        {title: 'Jewellery', img: '18377442.jpg', product_type:'jewellery'},
+        {title: "Women's Shoes", img: 'womens-shoes-group-1.jpg', product_type:"women's shoes"},
+        {title: 'Handbags', img: 'handbags-main-1.jpg', product_type:'handbags'},
+        {title: 'Jewellery', img: 'jewelry-group-1.jpg', product_type:'jewellery'},
         {title: "Men's Suits", img: 'ezgif-1-1cdd1505eee4.jpg', product_type:'mens-suits'},
-        {title: "Men's Shoes", img: 'ezgif-1-efb24a72f48f.jpg', product_type:'mens-shoes'},
+        {title: "Men's Shoes", img: 'mens-shoes-group-1.jpg', product_type:'mens-shoes'},
         
       ]
     }

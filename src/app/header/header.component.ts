@@ -3,6 +3,7 @@ import { CartService } from '../cart/cart.service';
 import { UserService } from '../user/user.service';
 import { User } from '../shared/models/data-model';
 import { UseExistingWebDriver } from 'protractor/built/driverProviders';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +17,8 @@ export class HeaderComponent implements OnInit {
   
   constructor(
     private cartService:CartService,
-    private userService:UserService
+    private userService:UserService,
+    private router:Router
   ) {
     // this.credentials = {email: 'admin@admin.com', password: 'admin', token: ''};
     this.user = new User();
@@ -26,7 +28,9 @@ export class HeaderComponent implements OnInit {
   }
   
   private logIn() {
-    this.userService.login(this.user).subscribe();
+    this.userService.login(this.user).subscribe(user => {
+      this.router.navigate(['/pending-orders'])
+    });
   }
   private showOverlay() {
     console.log('SHOW OVERLAY')

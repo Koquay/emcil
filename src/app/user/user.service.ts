@@ -4,13 +4,14 @@ import { HttpClient } from '@angular/common/http';
 import { tap, map, catchError } from 'rxjs/operators';
 import { User } from '../shared/models/data-model';
 import { MessageService } from '../shared/message/message/message.service';
+import { timer } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private userUrl = '/api/user/';
-  private isLoggedIn = false;
+  public isLoggedIn = false;
 
   constructor(
     private httpClient:HttpClient,
@@ -25,6 +26,8 @@ export class UserService {
         console.log('user', user)
         localStorage.setItem('user', JSON.stringify(user));
         this.isLoggedIn = true;
+        this.startLogInTimer();
+        return user;
       }),
       catchError(error => {
         console.log('error', error)
@@ -32,5 +35,16 @@ export class UserService {
         throw error;
       })
     )
+  }
+
+  private startLogInTimer() {
+    const source = timer(14400000);
+    // const source = timer(5000);
+
+    const subscribe = source.subscribe(val => {
+      console.log('******** timer login out now')
+      localStorage.removeItem('user');
+      this.isLoggedIn = false;
+    });
   }
 }

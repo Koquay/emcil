@@ -42,7 +42,7 @@ exports.login = async (user) => {
         }
 
 
-        user.token = await jwt.sign({ email: user.email }, process.env.SECRET, { expiresIn: 3600 });
+        user.token = await jwt.sign({ email: user.email }, process.env.SECRET, { expiresIn: 14400000 });
         delete user.password;
         console.log('user service user ', user)
         return user;
