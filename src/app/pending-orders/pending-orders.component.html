@@ -1,10 +1,11 @@
 <app-header></app-header>
 <app-message></app-message>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
 <div class="container top-spacing">
     <app-page-header [headerName]="headerName" [destination]="destination" [destinationIcon]="destinationIcon" [link]="link">
     </app-page-header>
 </div>
-<div class="container top-spacing mb-5 view-height" id="orders">
+<div class="container top-spacing mb-5 view-height" id="orders" *ngIf="!isLoading">
     <section id="order">
         <section class="pt-4">
             <div class="row d-none d-lg-flex pt-3 font-weight-bold justify-content-center">
@@ -72,8 +73,7 @@
                         <label class="col-form-label">Phone:</label>
                     </div>
                     <div class="col-12 col-md-4 col-lg-2 mb-2">
-                        <input class="form-control" type="text" name="phone" [(ngModel)]="searchCriteria.phone" 
-                            mask="(000) 000-0000" maxlength="14">
+                        <input class="form-control" type="text" name="phone" [(ngModel)]="searchCriteria.phone" mask="(000) 000-0000" maxlength="14">
                     </div>
                 </div>
 
@@ -108,35 +108,38 @@
                     <hr class="mt-0">
                 </div>
             </div>
-            <div class="row justify-content-center px-2 px-md-0" *ngFor="let order of pendingOrders">
-                <div class="col-6 col-lg-2">
-                    <a (click)="getSearchedOrder(order.order_no)">
-                        <span>{{order.order_no}}<br></span>
-                    </a>
+            <mat-spinner *ngIf="isLoading"></mat-spinner>
+            <ng-container *ngIf="!isLoading">
+                <div class="row justify-content-center px-2 px-md-0" *ngFor="let order of pendingOrders">
+                    <div class="col-6 col-lg-2">
+                        <a (click)="getSearchedOrder(order.order_no)">
+                            <span>{{order.order_no}}<br></span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-lg-2">
+                        <a (click)="getSearchedOrder(order.order_no)">
+                            <span>{{order.created_on | date}}<br></span>
+                        </a>
+                    </div>
+                    <div class="col-6 col-lg-3">
+                        <span class="mr-1">
+                            {{order.customer.shipping_address.first_name}}
+                        </span>
+                        <span>
+                            {{order.customer.shipping_address.last_name}}
+                        </span>
+                    </div>
+                    <div class="col-6 col-lg-2">
+                        <span>{{order.customer.shipping_address.phone | mask: '(000) 000-0000'}}</span>
+                    </div>
+                    <div class="col-2 col-lg-1 text-left text-lg-center">
+                        <span>{{order.status}}</span>
+                    </div>
+                    <div class="col-12">
+                        <hr>
+                    </div>
                 </div>
-                <div class="col-6 col-lg-2">
-                    <a (click)="getSearchedOrder(order.order_no)">
-                        <span>{{order.created_on | date}}<br></span>
-                    </a>
-                </div>
-                <div class="col-6 col-lg-3">
-                    <span class="mr-1">
-                        {{order.customer.shipping_address.first_name}}
-                    </span>
-                    <span>
-                        {{order.customer.shipping_address.last_name}}
-                    </span>
-                </div>
-                <div class="col-6 col-lg-2">
-                    <span>{{order.customer.shipping_address.phone | mask: '(000) 000-0000'}}</span>
-                </div>
-                <div class="col-2 col-lg-1 text-left text-lg-center">
-                    <span>{{order.status}}</span>
-                </div>
-                <div class="col-12">
-                    <hr>
-                </div>
-            </div>
+            </ng-container>
         </section>
     </section>
 </div>

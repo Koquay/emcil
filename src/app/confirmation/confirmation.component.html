@@ -94,7 +94,7 @@
                 <h5>Price</h5>
             </div>
             <div class="col-3 text-center">
-                <h5>Edit Order</h5>
+                <h5 class="edit-order">Edit Order</h5>
             </div>
         </div>
         <div class="row d-none d-lg-flex">
@@ -117,7 +117,9 @@
             <div class="col-6 text-right col-lg-2">
                 <span>{{item.price * item.quantity | currency:'USD':'symbol-narrow'}}</span>
             </div>
-            <div class="col-6 text-center col-lg-3"><i class="fa fa-edit"></i></div>
+            <div class="col-6 text-center col-lg-3">
+                <i class="fa fa-edit"></i>
+            </div>
             <div class="col-12 text-center">
                 <hr>
             </div>

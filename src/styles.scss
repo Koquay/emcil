@@ -72,7 +72,7 @@ input[type="checkbox"] {
 }
 
 .view-height {
-    min-height: 75vh;
+    // min-height: 100vh !important;
   }
 
   .header-wrapper {
@@ -104,6 +104,10 @@ input[type="checkbox"] {
         background: $primary;
     }
   }
+
+  mat-spinner {
+      margin: auto;
+  }
   
 
 @media(min-width: 768px) {
@@ -125,7 +129,7 @@ input[type="checkbox"] {
     }  
 
     .view-height {
-        min-height: 70vh;
+        // min-height: 70vh;
       }
 }
 
@@ -142,3 +146,6 @@ input[type="checkbox"] {
 
 
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

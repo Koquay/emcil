@@ -21,7 +21,7 @@ export class ProductDisplayComponent implements OnInit {
   private link = '/cart';
   private quantities;
   private quantity = 1;
-
+ 
   constructor(
     private productService:ProductService,
     private activatedRoute:ActivatedRoute,
@@ -37,7 +37,6 @@ export class ProductDisplayComponent implements OnInit {
 
   private getProductById() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
-
     this.productService.getProductById(id).subscribe(product => {
       this.product = product;
       this.displayImage = this.product.images[0];

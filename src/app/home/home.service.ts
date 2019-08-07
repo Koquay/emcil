@@ -23,11 +23,11 @@ export class HomeService {
   private createCarouselItems() {
     this.carouselItems = {
       items: [
-        {link: '', src: 'ezgif-1-4c5356e4e2a5.jpg', alt: ''},
-        {link: '', src: 'ezgif-1-d937390733e5.jpg', alt: ''},
-        {link: '', src: 'ezgif-1-c402985bfe3c.jpg', alt: ''},
-        {link: '', src: 'ezgif-1-f13a1c74a928.jpg', alt: ''},
-        {link: '', src: 'ezgif-1-f1c99974a1da.jpg', alt: ''},              
+        {link: '', src: 'mens-shoes-group-2.jpg', alt: ''},
+        {link: '', src: 'jewelry-group-2.jpg', alt: ''},
+        {link: '', src: 'womens-shoes-group-2.jpg', alt: ''},
+        {link: '', src: 'handbag-carousel-2.jpg', alt: ''},
+        {link: '', src: 'jewelry-carousel-2.jpg', alt: ''},              
       ]
     };
 

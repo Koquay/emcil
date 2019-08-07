@@ -9,20 +9,21 @@ import { Product } from '../shared/models/data-model';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  private products:Product[];
+  private products: Product[];
   private headerName;
   private destination = "VIEW SHOPPING CART";
   private destinationIcon = "fa-cart-arrow-down";
   private link = '/cart';
+  private isLoading = true;
 
   constructor(
-    private productService:ProductService,
-    private activatedRoute:ActivatedRoute,
+    private productService: ProductService,
+    private activatedRoute: ActivatedRoute,
     private router: Router
-  ) { 
+  ) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
-    } 
+    }
 
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd) {
@@ -38,8 +39,10 @@ export class ProductComponent implements OnInit {
   private getProductsByType() {
     let type = this.activatedRoute.snapshot.paramMap.get('product_type')
     console.log('product_type', type)
+    this.isLoading = true;
     this.productService.getProductsByType(type).subscribe(products => {
       this.products = products;
+      this.isLoading = false;
       this.headerName = this.products[0].product_type;
     })
   }

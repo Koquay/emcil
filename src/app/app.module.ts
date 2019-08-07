@@ -7,6 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { SharedModule } from './shared/modules/shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './shared/interceptors/request-interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { RequestInterceptor } from './shared/interceptors/request-interceptor';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass:RequestInterceptor, multi: true}],
   bootstrap: [AppComponent]

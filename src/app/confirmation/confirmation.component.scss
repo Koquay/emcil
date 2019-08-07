@@ -17,6 +17,11 @@ $red: #a30000;
         }
     }
     
+    .edit-order,
+    .fa-edit {
+        opacity: .5;
+    }
+
     .fa-edit {
         color: $red;
     }

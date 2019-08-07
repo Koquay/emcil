@@ -8,7 +8,7 @@ import { PageHeaderComponent } from '../../components/page-header/page-header.co
 import { MessageComponent } from '../../message/message/message.component';
 import { BreadcrumbComponent } from '../../breadcrumb/breadcrumb.component';
 import { FormsModule } from '@angular/forms';
-
+// import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -16,12 +16,13 @@ import { FormsModule } from '@angular/forms';
     FooterComponent,
     PageHeaderComponent,
     MessageComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    // MatProgressSpinnerModule
   ],
   imports: [
     CommonModule,
     SharedRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [
     HeaderComponent,

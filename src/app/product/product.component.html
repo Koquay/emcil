@@ -1,6 +1,7 @@
 <app-header></app-header>
 <app-message></app-message>
-<div class="container top-spacing">
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<div class="container top-spacing" *ngIf="!isLoading">
     <app-page-header [headerName]="headerName" [destination]="destination" 
         [destinationIcon]="destinationIcon" [link]="link">
     </app-page-header>

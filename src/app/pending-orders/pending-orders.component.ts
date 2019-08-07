@@ -14,6 +14,7 @@ export class PendingOrdersComponent implements OnInit {
   private  orders:Order[];
   private  pendingOrders:Order[];
   private searchCriteria:SearchCriteria;
+  private isLoading = true;
   
   constructor(
     private orderService:OrderService,
@@ -38,17 +39,20 @@ export class PendingOrdersComponent implements OnInit {
   }
 
   private getPendingOrders() {
+    this.isLoading = true;
     this.orderService.getOrdersByStatus("P").subscribe(orders => {
       this.orders = orders;
+      this.isLoading = false;
     })
   }
 
 
   private searchOrder() {
     console.log('Order Search', this.searchCriteria)
-
+    this.isLoading = true;
     this.orderService.searchOrder(this.searchCriteria).subscribe(orders => {
       this.pendingOrders = orders;
+      this.isLoading = false;
     })
   }
 

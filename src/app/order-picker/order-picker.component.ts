@@ -14,6 +14,7 @@ export class OrderPickerComponent implements OnInit {
   private headerName = "ORDER PICKER";
   private order: Order;
   private products: Product[];
+  private isLoading = true;
 
   constructor(
     private orderService: OrderService,
