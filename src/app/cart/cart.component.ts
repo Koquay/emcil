@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from './cart.service';
 import { ProductService } from '../product/product.service';
+import { Product } from '../shared/models/data-model';
 
 @Component({
   selector: 'app-cart',
@@ -13,6 +14,7 @@ export class CartComponent implements OnInit {
   private destinationIcon = "fa-check-square-o"
   private link = '/checkout';
   private order;
+  private deleteItem;
 
   constructor(
     private cartService:CartService,
@@ -42,6 +44,11 @@ export class CartComponent implements OnInit {
     return description;
   }
 
+  private getProductName(productNo) {
+    return this.productService.getProductName(productNo)   
+
+  }
+
   private increaseQuantity(item) {
     item.quantity += 1;
     this.getOrder();
@@ -58,6 +65,10 @@ export class CartComponent implements OnInit {
     this.cartService.removeItem(item).subscribe(order => {
       this.order = order;
     })
+  }
+
+  private setDeleteItem(item) {
+    this.deleteItem = item;
   }
 
 }

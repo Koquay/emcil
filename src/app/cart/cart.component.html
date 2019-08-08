@@ -1,8 +1,7 @@
 <app-header></app-header>
 <app-message></app-message>
 <div class="container mt-4 mb-5 view-height" id="cart">
-    <app-page-header [headerName]="headerName" [destination]="destination" 
-        [destinationIcon]="destinationIcon" [link]="link">
+    <app-page-header [headerName]="headerName" [destination]="destination" [destinationIcon]="destinationIcon" [link]="link">
     </app-page-header>
     <section id="items">
         <div class="row d-none d-lg-flex pt-3 justify-content-center">
@@ -40,7 +39,10 @@
                 <a (click)="increaseQuantity(item)">
                     <i class="fa fa-plus-square mr-2 quantity-change"></i>
                 </a>
-                <a (click)="removeItem(item)">
+                <!-- <a (click)="removeItem(item)">
+                    <i class="fa fa-trash-o trash"></i>
+                </a> -->
+                <a (click)="setDeleteItem(item)" data-toggle="modal" data-target="#deleteItemModal">
                     <i class="fa fa-trash-o trash"></i>
                 </a>
             </div>
@@ -87,3 +89,39 @@
     </section>
 </div>
 <app-footer></app-footer>
+
+
+<!-- Delete Item Modal -->
+
+<section id="confirmModal" *ngIf="deleteItem">
+    <div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog" aria-labelledby="deleteItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title primary-color" id="deleteItemModalLabel">
+                        Delete this item from your cart?
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-2">
+                            <img class="img-fluid" src="assets/img/{{getProductImg(deleteItem.product_no)}}" />
+                        </div>
+                        <div class="col d-flex justify-content-start align-items-center">
+                            <span class="d-flex">{{getProductName(deleteItem.product_no)}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary btn-delete secondary-background" data-dismiss="modal" (click)="removeItem(deleteItem)">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

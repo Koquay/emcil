@@ -52,4 +52,20 @@ $tertiary: #b6e3ff;
         padding: .5rem 4rem;
     }
 
+    
+
+}
+
+
+.modal-header {
+    button,
+    h5 {
+        color: $primary !important;            
+    }        
+}
+
+.modal-footer {
+    .btn-delete {
+        background: $red;
+    }
 }

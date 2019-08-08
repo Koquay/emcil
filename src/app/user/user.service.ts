@@ -5,6 +5,7 @@ import { tap, map, catchError } from 'rxjs/operators';
 import { User } from '../shared/models/data-model';
 import { MessageService } from '../shared/message/message/message.service';
 import { timer } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class UserService {
 
   constructor(
     private httpClient:HttpClient,
-    private messageService:MessageService
+    private messageService:MessageService,
+    private router:Router
   ) { }
 
   public login(user:User) {
@@ -44,6 +46,7 @@ export class UserService {
     const subscribe = source.subscribe(val => {
       localStorage.removeItem('user');
       this.isLoggedIn = false;
+      this.router.navigate(['/home'])
     });
   }
 }

@@ -52,6 +52,11 @@ export class ProductService {
     return product.description;
   }  
 
+  public getProductName(productNo) {
+    const product = this.products.find(product => product.product_no == productNo);
+    return product.name;
+  }  
+
   public getSimilarProducts(product_no, product_type) {
     const products = this.products.filter(product => 
       product.product_no != product_no && product.product_type == product_type);
