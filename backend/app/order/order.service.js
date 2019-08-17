@@ -2,9 +2,31 @@ require('./order.model');
 const Order = require('mongoose').model('Order')
 const Product = require('mongoose').model('Product')
 const moment = require('moment-timezone');
+const stripe = require('stripe')('sk_test_ybjdse51Sh1sgPPanyxXQANL007sdrs1D3');
 
-exports.post = async (newOrder) => {
+exports.placeOrder = async (newOrder) => {
+
+    // const paid = createCharge(newOrder);
+    // console.log('paid', paid)
+
+
+
     try {
+        const charge = await stripe.charges.create({
+            amount: newOrder.total * 100,
+            currency: 'cad',
+            description: newOrder.order_no,
+            source: newOrder.card_token + '333',
+        });
+
+        if (!charge.paid) {
+            let error = new Error();
+            error.message = '2. There is a problem charging your credit card. Please enter correct information';
+            error.status = '500';
+            throw error;
+        }
+
+        console.log('Order Service new order', newOrder)
         const order = new Order(newOrder);
         order.created_on = moment.tz('America/Toronto').format('YYYY-MM-DD hh:mm A');
         console.log('order', order)
@@ -12,10 +34,32 @@ exports.post = async (newOrder) => {
         return order;
     } catch (error1) {
         let error = new Error();
-        error.message = 'There is a problem placing your order. Please try again or contact IT Department.';
+        error.message = '1. There is a problem placing your order. Please try again or contact IT Department.';
         error.status = '500';
         throw error;
     }
+}
+
+const createCharge = async (newOrder) => {
+    try {
+        const charge = await stripe.charges.create({
+            amount: newOrder.total * 100,
+            currency: 'cad',
+            description: newOrder.order_no,
+            source: newOrder.card_token + '333',
+        });
+
+        console.log('charge', charge)
+        console.log('charge.paid', charge.paid)
+        // return false;
+        return charge.paid;
+    } catch (error1) {
+        let error = new Error();
+        error.message = '3. There is a problem processing your credit card.';
+        error.status = '500';
+        throw error;
+    }
+
 }
 
 exports.getOrdersByStatus = async (status) => {
@@ -125,15 +169,15 @@ exports.setOrderStatus = async (orderInfo) => {
     let date = moment.tz('America/Toronto').format('YYYY-MM-DD hh:mm A');
 
     try {
-        if (orderInfo.status == "P") {
+        if (orderInfo.status == "Pending") {
             await Order.updateOne({ order_no: orderInfo.orderNo },
                 { status: orderInfo.status, shipped_date: null, cancelled_date: null })
         }
-        else if (orderInfo.status == "S") {
+        else if (orderInfo.status == "Shipped") {
             await Order.updateOne({ order_no: orderInfo.orderNo },
                 { status: orderInfo.status, shipped_date: date, cancelled_date: null })
         }
-        else if (orderInfo.status == "C") {
+        else if (orderInfo.status == "Cancelled") {
             await Order.updateOne({ order_no: orderInfo.orderNo },
                 { status: orderInfo.status, cancelled_date: date, shipped_date: null })
         }

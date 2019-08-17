@@ -9,6 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RequestInterceptor } from './shared/interceptors/request-interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     HttpClientModule,
     SharedModule,
     BrowserAnimationsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxStripeModule.forRoot('pk_test_zG3kv6VtWOPTLvijoeeRZFZq00Gb2MWxiZ'),
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass:RequestInterceptor, multi: true}],
   bootstrap: [AppComponent]

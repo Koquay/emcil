@@ -31,9 +31,9 @@ export class Address {
 
 export class Payment {
     credit_card_no: string;
-    cw: string;
+    cvc: string;
     exp_month: string;
-    exp_year: string;
+    exp_year: string;    
 }
 
 export class Customer {
@@ -78,6 +78,7 @@ export class Order {
     order_items: OrderItem[] = [];
     special_instructions: string;
     status: string;
+    card_token: string;
     created_on: Date;
 
     constructor() {

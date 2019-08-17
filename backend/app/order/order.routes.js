@@ -8,7 +8,7 @@ router.get('/:status', UserController.authenticate, OrderController.getOrdersByS
 router.get('/:orderNo/1', OrderController.getSearchedOrder);
 router.post('/:deleteItem/1', UserController.authenticate, OrderController.deleteItem);
 router.post('/:status', UserController.authenticate, OrderController.setOrderStatus);
-router.post('/', OrderController.post);
+router.post('/', OrderController.placeOrder);
 
 
 module.exports = router;

@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   private isOverlay = false;
-  // private credentials: {email:string, password:string, token:string}; 
   private user:User;
   
   constructor(
@@ -20,7 +19,6 @@ export class HeaderComponent implements OnInit {
     private userService:UserService,
     private router:Router
   ) {
-    // this.credentials = {email: 'admin@admin.com', password: 'admin', token: ''};
     this.user = new User();
    }
 

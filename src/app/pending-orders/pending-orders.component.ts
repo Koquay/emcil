@@ -40,7 +40,7 @@ export class PendingOrdersComponent implements OnInit {
 
   private getPendingOrders() {
     this.isLoading = true;
-    this.orderService.getOrdersByStatus("P").subscribe(orders => {
+    this.orderService.getOrdersByStatus("Pending").subscribe(orders => {
       this.orders = orders;
       this.isLoading = false;
     })

@@ -14,7 +14,7 @@ const AddressSchema = new Schema({
 
 const PaymentSchema = new Schema({
     credit_card_no: String,
-    cw: String,
+    cvc: String,
     exp_month: String,
     exp_year: String,
 }, {_id: false});
@@ -57,7 +57,7 @@ const OrderSchema = new Schema({
     special_instructions: String,
     status: {
         type:String,
-        default: "P"
+        default: "Pending"
     },
     created_on: {
         type:Date,

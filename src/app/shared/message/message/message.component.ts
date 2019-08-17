@@ -16,8 +16,7 @@ export class MessageComponent implements OnInit {
   @ViewChild('openMessage', { static: true }) openMessage: ElementRef<HTMLElement>;
 
   constructor(
-    private alertService: AlertService,
-    private messageService: MessageService
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {

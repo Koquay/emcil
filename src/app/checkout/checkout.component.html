@@ -37,8 +37,7 @@
                 <div class="form-row">
                     <div class="col-12 col-lg-6 mb-4">
                         <label>Phone</label>
-                        <input class="form-control" type="text" required 
-                            [(ngModel)]="order.customer.shipping_address.phone" #phone="ngModel" name="phone"
+                        <input class="form-control" type="text" required [(ngModel)]="order.customer.shipping_address.phone" #phone="ngModel" name="phone"
                             mask="(000) 000 0000">
                         <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="error-color">
                             <div *ngIf="phone.errors.required">
@@ -218,7 +217,10 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="col-12 col-lg-6 mb-4">
+                <label for="card-element">Enter Credit Card Information Below:</label>
+                <div id="card-element" class="col-12 mb-4">
+                </div>
+                <!-- <div class="col-12 col-lg-6 mb-4">
                     <label>Card Number</label>
                     <input class="form-control" type="text" required [(ngModel)]="order.customer.payment.credit_card_no" #credit_card_no="ngModel"
                         name="credit_card_no" mask="0000 0000 0009 0000">
@@ -229,20 +231,20 @@
                     </div>
                 </div>
                 <div class="col-12 mb-4 col-lg-6">
-                    <label>CW (On back of card)</label>
-                    <input class="form-control" type="text" required minlength="3" maxlength="3" [(ngModel)]="order.customer.payment.cw" #cw="ngModel"
-                        name="cw">
-                    <div *ngIf="cw.invalid && (cw.dirty || cw.touched)" class="error-color">
-                        <div *ngIf="cw.errors.required">
-                            CW is required
+                    <label>CVC (On back of card)</label>
+                    <input class="form-control" type="text" required minlength="3" maxlength="3" [(ngModel)]="order.customer.payment.cvc" #cvc="ngModel"
+                        name="cvc">
+                    <div *ngIf="cvc.invalid && (cvc.dirty || cvc.touched)" class="error-color">
+                        <div *ngIf="cvc.errors.required">
+                            CVC is required
                         </div>
-                        <div *ngIf="cw.errors.minlength">
-                            CW must be 3 digits
+                        <div *ngIf="cvc.errors.minlength">
+                            CVC must be 3 digits
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
-            <div class="form-row">
+            <!-- <div class="form-row">
                 <div class="col-12 col-lg-6 mb-4">
                     <label>Expiration Month</label>
                     <select class="form-control expiration" required name="exp_month" [(ngModel)]="order.customer.payment.exp_month" #exp_month="ngModel">
@@ -269,7 +271,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </section>
         <section class="text-center">
             <div class="mt-4">
