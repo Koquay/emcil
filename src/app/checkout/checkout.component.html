@@ -213,65 +213,14 @@
             </div>
             <div class="form-row mb-4">
                 <div class="col-12 text-center">
-                    <img class="img-fluid" src="assets/img/payment.png">
+                    <img class="img-fluid" src="assets/img/payment-2.png">
                 </div>
             </div>
             <div class="form-row">
                 <label for="card-element">Enter Credit Card Information Below:</label>
                 <div id="card-element" class="col-12 mb-4">
                 </div>
-                <!-- <div class="col-12 col-lg-6 mb-4">
-                    <label>Card Number</label>
-                    <input class="form-control" type="text" required [(ngModel)]="order.customer.payment.credit_card_no" #credit_card_no="ngModel"
-                        name="credit_card_no" mask="0000 0000 0009 0000">
-                    <div *ngIf="credit_card_no.invalid && (credit_card_no.dirty || credit_card_no.touched)" class="error-color">
-                        <div *ngIf="credit_card_no.errors.required">
-                            Credit Card Number is required
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 mb-4 col-lg-6">
-                    <label>CVC (On back of card)</label>
-                    <input class="form-control" type="text" required minlength="3" maxlength="3" [(ngModel)]="order.customer.payment.cvc" #cvc="ngModel"
-                        name="cvc">
-                    <div *ngIf="cvc.invalid && (cvc.dirty || cvc.touched)" class="error-color">
-                        <div *ngIf="cvc.errors.required">
-                            CVC is required
-                        </div>
-                        <div *ngIf="cvc.errors.minlength">
-                            CVC must be 3 digits
-                        </div>
-                    </div>
-                </div> -->
             </div>
-            <!-- <div class="form-row">
-                <div class="col-12 col-lg-6 mb-4">
-                    <label>Expiration Month</label>
-                    <select class="form-control expiration" required name="exp_month" [(ngModel)]="order.customer.payment.exp_month" #exp_month="ngModel">
-                        <option *ngFor="let expMonth of expMonths">
-                            {{expMonth.month}}
-                        </option>
-                    </select>
-                    <div *ngIf="exp_month.invalid && (exp_month.dirty || exp_month.touched)" class="error-color">
-                        <div *ngIf="exp_month.errors.required">
-                            Expiration Month is required
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6 mb-4">
-                    <label>Expiration Year<br></label>
-                    <select class="form-control expiration" required name="exp_year" [(ngModel)]="order.customer.payment.exp_year" #exp_year="ngModel">
-                        <option *ngFor="let expYear of expYears">
-                            {{expYear.year}}
-                        </option>
-                    </select>
-                    <div *ngIf="exp_year.invalid && (exp_year.dirty || exp_year.touched)" class="error-color">
-                        <div *ngIf="exp_year.errors.required">
-                            Expiration Year is required
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </section>
         <section class="text-center">
             <div class="mt-4">

@@ -5,6 +5,7 @@ import { OrderService } from '../order/order.service';
 import { ConfirmationService } from '../confirmation/confirmation.service';
 import { Router } from '@angular/router';
 import { StripeService, Elements, Element as StripeElement, ElementsOptions } from "ngx-stripe";
+import { MessageService } from '../shared/message/message/message.service';
 
 @Component({
   selector: 'app-checkout',
@@ -33,7 +34,8 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
     private orderService: OrderService,
     private confirmationService: ConfirmationService,
     private router: Router,
-    private stripeService: StripeService
+    private stripeService: StripeService,
+    private messageService:MessageService
   ) { }
 
   ngOnInit() {
@@ -42,7 +44,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.initCard();
+    this.initCreditCard();
   }
 
   private getOrder() {
@@ -55,45 +57,23 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
   private placeOrder() {
     this.stripeService.createToken(this.card, { name }).subscribe(result => {
       if (result.token) {
-        console.log('result.token', result.token);
         this.order.card_token = result.token.id
-        console.log('order token', this.order.card_token);
         console.log('order', this.order)
         this.orderService.placeOrder(this.order).subscribe(order => {
           let newOrder = JSON.parse(JSON.stringify(order));
           this.confirmationService.setOrder(newOrder);
-          // this.resetOrder();
+          this.resetOrder();
           this.router.navigate(['/confirmation']);
         })
       } else if (result.error) {
         console.log('result.error', result.error.message);
+        this.messageService.sendInfo("There is a problem charging your credit card. Please enter correct information");
+        return;        
       }
     });
-
-
-    // if (this.order.customer.shippingAndBillingSame) {
-    //   this.order.customer.billing_address = this.order.customer.shipping_address;
-    // }
-
   }
 
-  private async validateCreditCard() {
-
-    // (<any>window).Stripe.setPublishableKey('pk_test_zG3kv6VtWOPTLvijoeeRZFZq00Gb2MWxiZ');
-    // this.order.customer.payment.credit_card_no = '4242 4242 4242 4242';
-
-    // (<any>window).Stripe.card.createToken({      
-    //   number: this.order.customer.payment.credit_card_no,
-    //   exp_month: 12,
-    //   exp_year: 20,
-    //   cvc: this.order.customer.payment.cvc
-    // }, (status: number, response: any) => {
-    //   console.log('response', response)
-    //   return response.id;
-    // });
-  }
-
-  private initCard() {
+  private initCreditCard() {
     this.stripeService.elements(this.elementsOptions).subscribe(elements => {
       this.elements = elements;
 
@@ -108,7 +88,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
               fontFamily: 'Roboto, "Helvetica Neue", Helvetica, sans-serif',
               fontSize: '18px',
               '::placeholder': {
-                color: '#CFD7E0'
+                color: '#CFD7E0',
               }
             }
           }
