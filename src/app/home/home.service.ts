@@ -27,7 +27,8 @@ export class HomeService {
         {link: '', src: 'jewelry-group-2.jpg', alt: ''},
         {link: '', src: 'womens-shoes-group-2.jpg', alt: ''},
         {link: '', src: 'handbag-carousel-2.jpg', alt: ''},
-        {link: '', src: 'jewelry-carousel-2.jpg', alt: ''},              
+        {link: '', src: 'jewelry-carousel-2.jpg', alt: ''},       
+        {link: '', src: 'ezgif-1-f1c99974a1da.jpg', alt: ''},          
       ]
     };
 

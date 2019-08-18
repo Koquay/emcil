@@ -25,13 +25,13 @@
             </div>
         </div>
         <div class="row py-3 my-2" id="order-info-2">
-            <div class="col-12 col-lg-4 col-md-6 mb-2">
+            <div class="col-12 col-lg-6 col-md-6 mb-2">
                 <span class="d-block mb-1">Your estimated delivery date is:</span>
                 <span class="d-block font-weight-bold mb-2"><strong>Jul 21, 2019</strong></span>
                 <span class="d-block mb-1">Your shipping speed is:</span>
                 <span class="d-block font-weight-bold mb-2"><strong>Standard Shipping</strong><br></span>
             </div>
-            <div class="col-12 col-lg-4 col-md-6 mb-2">
+            <div class="col-12 col-lg-6 col-md-6 mb-2">
                 <span class="d-block">Shipping Address:</span>
                 <span class="d-block font-weight-bold">
                     <span class="mr-2">
@@ -55,7 +55,7 @@
                     <strong>{{order.customer.shipping_address.postal_code}}</strong><br>
                 </span>
             </div>
-            <div class="col-12 col-lg-4 col-md-6 mb-2">
+            <!-- <div class="col-12 col-lg-4 col-md-6 mb-2">
                 <span class="d-block">Billing Address:</span>
                 <span class="d-block font-weight-bold">
                     <span class="mr-2">
@@ -78,7 +78,7 @@
                 <span class="d-block font-weight-bold">
                     <strong>{{order.customer.billing_address.postal_code}}</strong><br>
                 </span>
-            </div>
+            </div> -->
         </div>
         <div class="row d-none d-lg-flex pt-3 font-weight-bold">
             <div class="col-2 text-center col-lg-1">
@@ -128,7 +128,7 @@
     <section>
         <div class="row">
             <div class="col col-lg-2 text-right offset-lg-5">
-                <span>Subtotal</span>
+                <span>Subtotal:</span>
             </div>
             <div class="col col-lg-2 text-right">
                 <span class="font-weight-bold">
@@ -138,7 +138,7 @@
         </div>
         <div class="row">
             <div class="col col-lg-2 text-right offset-lg-5">
-                <span>Tax</span>
+                <span>Tax:</span>
             </div>
             <div class="col col-lg-2 text-right">
                 <span class="font-weight-bold">
@@ -147,7 +147,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col col-lg-2 text-right offset-lg-5"><span>Discount</span></div>
+            <div class="col col-lg-2 text-right offset-lg-5"><span>Discount:</span></div>
             <div class="col col-lg-2 text-right">
                 <span id="discount" class="font-weight-bold">
                         {{order.discount | currency:'USD':'symbol-narrow'}}
@@ -160,7 +160,7 @@
             </div>
         </div>
         <div class="row pb-2" id="total-row">
-            <div class="col col-lg-2 text-right offset-lg-5"><span>Total</span></div>
+            <div class="col col-lg-2 text-right offset-lg-5"><span>Total:</span></div>
             <div class="col col-lg-2 text-right">
                 <span class="font-weight-bold">
                         {{order.total | currency:'USD':'symbol-narrow'}}

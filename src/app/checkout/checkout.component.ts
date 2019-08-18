@@ -85,10 +85,10 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
               color: '#31325F',
               lineHeight: '40px',
               fontWeight: 300,
-              fontFamily: 'Roboto, "Helvetica Neue", Helvetica, sans-serif',
+              fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
               fontSize: '18px',
               '::placeholder': {
-                color: '#CFD7E0',
+                color: '#aab7c4',
               }
             }
           }

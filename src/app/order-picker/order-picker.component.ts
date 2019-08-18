@@ -69,6 +69,9 @@ export class OrderPickerComponent implements OnInit {
     this.orderPickerService.getOrderTotals(this.order);
     this.orderPickerService.deleteItemFromDB(this.order, itemId).subscribe(order => {
       this.findSelectedOrder();
+      if(this.order.order_items.length == 0) {
+        this.router.navigate(['/pending-orders'])
+      }
     })
   }
 
