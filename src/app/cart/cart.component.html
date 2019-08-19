@@ -65,7 +65,10 @@
         </div>
         <div class="row">
             <div class="col col-lg-2 text-right offset-lg-7"><span>Tax</span></div>
-            <div class="col col-lg-2 text-right"><span class="font-weight-bold">{{order.tax | currency:'USD':'symbol-narrow'}}</span></div>
+            <div class="col col-lg-2 text-right">
+                <span class="f-pt8">(TO BE COMPUTED)</span>
+                <!-- <span class="font-weight-bold">{{order.tax | currency:'USD':'symbol-narrow'}}</span> -->
+            </div>
         </div>
         <div class="row">
             <div class="col col-lg-2 text-right offset-lg-7"><span>Discount</span></div>
@@ -80,7 +83,10 @@
             </div>
         </div>
         <div class="row pb-2" id="total-row">
-            <div class="col col-lg-2 text-right offset-lg-7"><span>Total</span></div>
+            <div class="col col-lg-2 text-right offset-lg-7">
+                <span>Total</span>
+                <span class="f-pt8 ml-1">(w/o tax)</span>
+            </div>
             <div class="col col-lg-2 text-right"><span class="font-weight-bold">
                     {{order.total | currency:'USD':'symbol-narrow'}}
                 </span>

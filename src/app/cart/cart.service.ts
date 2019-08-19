@@ -31,13 +31,9 @@ export class CartService {
   public getOrder() {
     this.order.subtotal = this.getSubtotal();
     this.order.discount = this.getDiscount();
-    this.order.tax = this.getTax();
+    // this.order.tax = this.getTax();
     this.order.total = this.getTotal();    
     return of(this.order)
-  }
-
-  public getTax() {
-    return this.getSubtotal() * .10;
   }
 
   public getDiscount() {
@@ -45,7 +41,7 @@ export class CartService {
   }
 
   public getTotal() {
-    return this.getSubtotal() + this.getTax() - this.getDiscount();
+    return this.getSubtotal()  - this.getDiscount();
   }
 
   public getSubtotal() {

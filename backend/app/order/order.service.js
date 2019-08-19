@@ -8,33 +8,47 @@ var creditCardError = null;
 exports.placeOrder = async (newOrder) => {
 
     try {
-        const charge = await stripe.charges.create({
-            amount: newOrder.total * 100,
-            currency: 'cad',
-            description: newOrder.order_no,
-            source: newOrder.card_token,
-        });
+        const card_id = await chargeCard(newOrder);
+        console.log('card_id', card_id)
+        newOrder.card_id = card_id;
 
-        // console.log('charge.paid', typeof charge.paid);
-
-        if (!charge.paid) {
-            creditCardError = new Error();
-            creditCardError.message = '2. There is a problem charging your credit card. Please enter correct information';
-            creditCardError.status = '500';
-            throw creditCardError;
-        }
         const order = new Order(newOrder);
         order.created_on = moment.tz('America/Toronto').format('YYYY-MM-DD hh:mm A');
         console.log('order', order)
         order.save();
         return order;
     } catch (errorx) {
+        console.log('errorx', errorx)
         let error = new Error();
         error.message = '1. There is a problem processing your order. Please try again or contact us.';
         error.status = '500';
 
-        if(creditCardError) throw creditCardError;
+        if (creditCardError) throw creditCardError;
         else throw error;
+    }
+}
+
+const chargeCard = async (newOrder) => {
+    try {
+        const result = await stripe.charges.create({
+            amount: Math.round(newOrder.total) * 100,
+            currency: 'cad',
+            description: 'Order Number: ' + newOrder.order_no,
+            source: newOrder.card_token,
+            receipt_email: newOrder.customer.shipping_address.email,
+        });
+
+        if (!result.paid) {
+            let creditCardError = new Error();
+            creditCardError.message = '2. There is a problem charging your credit card. Please enter correct information';
+            creditCardError.status = '500';
+            throw creditCardError;
+        }
+
+        return result.id;
+    } catch (error) {
+        error.message = '1. There is a problem charging your credit card. Please enter correct information';
+        throw error;
     }
 }
 

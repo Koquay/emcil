@@ -4,6 +4,7 @@ import { Order, SearchCriteria } from '../shared/models/data-model';
 import { tap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MessageService } from '../shared/message/message/message.service';
+import { SalesTaxService } from '../shared/services/sales-tax.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,14 @@ export class OrderService {
 
   constructor(
     private httpClient: HttpClient,
-    private messageService:MessageService
+    private messageService:MessageService,
+    private salesTaxService:SalesTaxService
   ) { }
 
-  public placeOrder(order: Order) {
+  public placeOrder(order: Order) {    
+
+    order = this.computeTotals(order);
+
     return this.httpClient.post<Order>(this.orderUrl, { order: order }).pipe(
       tap(order => {
         console.log('order', order)
@@ -30,6 +35,16 @@ export class OrderService {
         throw error;
       })
     )
+  }
+
+  private computeTotals(order) {
+    let province = (order.customer.shipping_address.province).trim().toUpperCase();
+    let taxRate = this.salesTaxService.getTaxRate(province);
+
+    order.tax = order.subtotal * taxRate;
+    order.total = order.subtotal + order.tax - order.discount;
+    console.log('order with computed tax', order)
+    return order;
   }
 
   public getOrdersByStatus(status) {

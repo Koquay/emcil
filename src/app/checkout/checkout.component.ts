@@ -83,7 +83,7 @@ export class CheckoutComponent implements OnInit, AfterViewInit {
             base: {
               iconColor: '#666EE8',
               color: '#31325F',
-              lineHeight: '40px',
+              // lineHeight: '40px',
               fontWeight: 300,
               fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
               fontSize: '18px',
