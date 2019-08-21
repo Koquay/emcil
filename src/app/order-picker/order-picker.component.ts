@@ -64,6 +64,14 @@ export class OrderPickerComponent implements OnInit {
     })
   }
 
+  private refundCard() {
+    this.orderPickerService.refundCard(
+      {orderNo:this.order.order_no, card_id:this.order.card_id, status:this.order.status}
+    ).subscribe(() => {
+      this.router.navigate(['/pending-orders'])
+    })
+  }
+
   private deleteItem(orderId, itemId) {
     this.orderService.deleteItemFromOrder(orderId, itemId);
     this.orderPickerService.getOrderTotals(this.order);

@@ -11,6 +11,7 @@ import { MessageService } from '../shared/message/message/message.service';
 export class OrderPickerService {
   private orderProductUrl = '/api/order/prodForOrder/';
   private orderStatusUrl = '/api/order/status/';
+  private orderRefundUrl = '/api/order/refund/1/2/';
   private itemDeleteUrl = '/api/order/deleteItem/1/';
   private order:Order;
   
@@ -44,6 +45,18 @@ export class OrderPickerService {
     )
   }
 
+  public refundCard(refundInfo) {
+    return this.httpClient.post<Order>(this.orderRefundUrl, refundInfo)
+    .pipe(
+      tap(order => console.log('order after refund', order)),
+      catchError(error => {
+        console.log('error', error)
+        this.messageService.sendErrorMessage(error);
+        throw error;
+      })
+    )
+  }
+
   public deleteItemFromDB(order, itemId) {
     console.log('order to delete from DB', order)
     return this.httpClient.post<Order>(this.itemDeleteUrl, {order:order, itemId:itemId})
@@ -61,13 +74,8 @@ export class OrderPickerService {
     this.order = order;
     this.order.subtotal = this.getSubtotal();
     this.order.discount = this.getDiscount();
-    this.order.tax = this.getTax();
     this.order.total = this.getTotal();    
     return of(this.order)
-  }
-
-  public getTax() {
-    return this.getSubtotal() * .10;
   }
 
   public getDiscount() {
@@ -75,7 +83,7 @@ export class OrderPickerService {
   }
 
   public getTotal() {
-    return this.getSubtotal() + this.getTax() - this.getDiscount();
+    return this.getSubtotal() - this.getDiscount();
   }
 
   public getSubtotal() {

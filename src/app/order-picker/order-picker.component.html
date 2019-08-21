@@ -13,8 +13,8 @@
             </div>
         </div>
         <!-- <section class="mb-2"> -->
-        <div class="row mb-3">
-            <div class="col-12 d-flex d-lg-flex align-items-baseline" *ngIf="order.status != 'Shipped'">
+        <div class="row mb-3" *ngIf="order.status != 'Shipped' && order.status != 'Refunded'">
+            <div class="col-12 d-flex d-lg-flex align-items-baseline">
                 <label class="mr-2">Pending:</label>
                 <input type="radio" name="order_status" (change)="setOrderStatus()" value="Pending" [(ngModel)]="order.status">
             </div>
@@ -27,7 +27,7 @@
         </div>
 
         <!-- </section> -->
-        <div class="row mb-3">
+        <div class="row mb-3" *ngIf="order.status != 'Refunded'">
             <div class="col-12 d-flex d-lg-flex align-items-baseline">
                 <label class="mr-2">Shipped:</label>
                 <input type="radio" name="order_status" (change)="setOrderStatus()" value="Shipped" [(ngModel)]="order.status">
@@ -39,15 +39,15 @@
                 </span>
             </div>
         </div>
-        <div class="row mb-3" *ngIf="order.status != 'Shipped'">
+        <div class="row mb-3" *ngIf="order.status != 'Pending'">
             <div class="col-12 d-flex d-lg-flex align-items-baseline">
-                <label class="mr-2">Cancelled:</label>
-                <input type="radio" name="order_status" [(ngModel)]="order.status" value="Cancelled" (change)="setOrderStatus()">
+                <label class="mr-2">Refunded:</label>
+                <input type="radio" name="order_status" [(ngModel)]="order.status" value="Refunded" (change)="refundCard()">
             </div>
             <div class="col-12" id="">
-                <span class="mr-2">Cancelled Date:</span>
+                <span class="mr-2">Refund Date:</span>
                 <span id="no">
-                    <strong>{{order.cancelled_date | date}}</strong><br>
+                    <strong>{{order.refund_date | date}}</strong><br>
                 </span>
             </div>
         </div>
@@ -82,30 +82,6 @@
                     <strong>{{order.customer.shipping_address.postal_code}}</strong><br>
                 </span>
             </div>
-            <!-- <div class="col-12 col-lg-4 col-md-6 mb-2">
-                <span class="d-block">Billing Address:</span>
-                <span class="d-block font-weight-bold">
-                    <span class="mr-2">
-                        <strong>{{order.customer.billing_address.first_name}}</strong>
-                    </span>
-                    <span>
-                        <strong>{{order.customer.billing_address.last_name}}</strong>
-                    </span>
-                </span>
-                <span class="d-block font-weight-bold">
-                    <strong>{{order.customer.billing_address.street}}</strong><br>
-                </span>
-                <span class="d-block font-weight-bold">
-                    <strong>
-                        <span class="">{{order.customer.billing_address.city}}</span>
-                        <span class="mr-2">,</span>
-                        <span class="">{{order.customer.billing_address.province}}</span>
-                    </strong><br>
-                </span>
-                <span class="d-block font-weight-bold">
-                    <strong>{{order.customer.billing_address.postal_code}}</strong><br>
-                </span>
-            </div> -->
         </div>
         <section>
             <div class="row d-lg-flex justify-content-lg-center d-none d-lg-flex pt-3 font-weight-bold">

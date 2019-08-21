@@ -47,6 +47,8 @@ const OrderSchema = new Schema({
     shipped_date: Date,
     cancelled: Boolean,
     cancelled_date: Date,
+    refund: Boolean,
+    refund_date: Date,
     delivery_date: Date,
     discount: Number,
     tax: Number,

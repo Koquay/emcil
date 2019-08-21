@@ -28,6 +28,11 @@ exports.placeOrder = async (newOrder) => {
     }
 }
 
+exports.refundOrder = async (orderInfo) => {
+    await refundCard(orderInfo);
+    this.setOrderStatus({ orderNo: orderInfo.orderNo, status: orderInfo.status })
+}
+
 const chargeCard = async (newOrder) => {
     try {
         const result = await stripe.charges.create({
@@ -48,6 +53,22 @@ const chargeCard = async (newOrder) => {
         return result.id;
     } catch (error) {
         error.message = '1. There is a problem charging your credit card. Please enter correct information';
+        throw error;
+    }
+}
+
+const refundCard = async (orderInfo) => {
+    console.log('REFUND CARD CALLED')
+    try {
+        const refund = await stripe.refunds.create({
+            charge: orderInfo.card_id,
+        });
+
+        console.log('refund', refund)
+
+        return refund.id;
+    } catch (error) {
+        error.message = '1. There is a problem charging the credit card.';
         throw error;
     }
 }
@@ -161,20 +182,21 @@ exports.setOrderStatus = async (orderInfo) => {
     try {
         if (orderInfo.status == "Pending") {
             await Order.updateOne({ order_no: orderInfo.orderNo },
-                { status: orderInfo.status, shipped_date: null, cancelled_date: null })
+                { status: orderInfo.status, shipped_date: null})
         }
         else if (orderInfo.status == "Shipped") {
             await Order.updateOne({ order_no: orderInfo.orderNo },
-                { status: orderInfo.status, shipped_date: date, cancelled_date: null })
+                { status: orderInfo.status, shipped_date: date, refund_date: null})
         }
-        else if (orderInfo.status == "Cancelled") {
+        else if (orderInfo.status == "Refunded") {
             await Order.updateOne({ order_no: orderInfo.orderNo },
-                { status: orderInfo.status, cancelled_date: date, shipped_date: null })
+                { status: orderInfo.status, refund_date: date, shipped_date: null })
         }
 
         return [];
     } catch (errorx) {
         let error = new Error();
+        console.log('errorx', errorx)
         error.message = 'There is a problem setting order status. Please try again or contact IT Department.';
         error.status = '500';
         throw error;

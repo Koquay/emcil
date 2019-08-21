@@ -17,7 +17,6 @@ export class HomeService {
       of(this.carouselItems), 
       of(this.categories)
     ])
-    return of(this.carouselItems);
   }
 
   private createCarouselItems() {

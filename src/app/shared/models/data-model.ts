@@ -69,6 +69,8 @@ export class Order {
     shipped_date: Date;
     cancelled: boolean;
     cancelled_date: Date;
+    refund: boolean;
+    refund_date: Date;
     delivery_date: Date;
     discount: number;
     tax: number;
@@ -79,6 +81,7 @@ export class Order {
     special_instructions: string;
     status: string;
     card_token: string;
+    card_id: string;
     created_on: Date;
 
     constructor() {

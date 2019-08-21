@@ -64,6 +64,16 @@ exports.setOrderStatus = async (req, res) => {
     }
 }
 
+exports.refundOrder = async (req, res) => {
+    try {
+        console.log('*** Order refundCard ***', req.body)
+        const orders = OrderService.refundOrder(req.body);
+        return res.json([]);
+    } catch (error) {
+        return ErrorHandler.handleError('ORDER STUTUS ERROR', res, error);
+    }
+}
+
 exports.getSearchedOrder = async (req, res) => {
     console.log('*** Order Controller getSearchedOrder ***');
     console.log('req.params', req.params)
