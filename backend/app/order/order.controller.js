@@ -90,10 +90,10 @@ exports.getSearchedOrder = async (req, res) => {
 
 exports.deleteItem = async (req, res) => {
     console.log('*** Order Controller deleteItem ***');
-    console.log('req.body', req.body)
+    // console.log('req.body', req.body)
 
     try {
-        const order = await OrderService.deleteItem(req.body.order, req.body.itemId);
+        const order = await OrderService.deleteItem(req.body);
         return res.status(201).json(order);
     } catch (error) {
         return ErrorHandler.handleError('DELETE ITEM ERROR', res, error);

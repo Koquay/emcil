@@ -133,7 +133,7 @@
                     <div class="col-11 col-lg-1 offset-md-1 offset-lg-0 text-lg-center">
                         <ng-container *ngIf="order.status != 'Shipped'">
                             <span class="mr-2 d-lg-none font-weight-bold">Delete:</span>
-                            <a (click)="deleteItem(order._id, item._id)">
+                            <a (click)="deleteItem(order._id, item)">                        
                                 <i class="fa fa-trash-o"></i>
                             </a>
                         </ng-container>
@@ -166,14 +166,14 @@
                 </span>
             </div>
         </div>
-        <div class="row red">
+        <!-- <div class="row red">
             <div class="col-2 text-right offset-lg-5"><span>Discount</span></div>
             <div class="col-2 text-right">
                 <span id="discount" class="font-weight-bold">
                     {{order.discount | currency:'USD':'symbol-narrow'}}
                 </span>
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col col-lg-3 text-right offset-lg-6">
                 <hr>

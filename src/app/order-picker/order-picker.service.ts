@@ -4,6 +4,8 @@ import { Product, Order } from '../shared/models/data-model';
 import { tap, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { MessageService } from '../shared/message/message/message.service';
+import { SalesTaxService } from '../shared/services/sales-tax.service';
+import { OrderService } from '../order/order.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +19,9 @@ export class OrderPickerService {
   
   constructor(
     private httpClient:HttpClient,
-    private messageService:MessageService
+    private messageService:MessageService,
+    private salesTaxService:SalesTaxService,
+    private orderService:OrderService
   ) { }
 
   public getProductsForOrder(orderNo, prodNos) {
@@ -57,11 +61,17 @@ export class OrderPickerService {
     )
   }
 
-  public deleteItemFromDB(order, itemId) {
+  public deleteItemFromDB(order, item) {
     console.log('order to delete from DB', order)
-    return this.httpClient.post<Order>(this.itemDeleteUrl, {order:order, itemId:itemId})
+    let itemAmount = this.getItemAmount(order, item);
+    return this.httpClient.post<Order>(
+      this.itemDeleteUrl, 
+      {order:order, itemId:item._id, itemAmount:itemAmount}
+    )
     .pipe(
-      tap(order => console.log('order after delete', order)),
+      tap(order => {
+        console.log('order after delete', order)
+    }),
       catchError(error => {
         console.log('error', error)
         this.messageService.sendErrorMessage(error);
@@ -70,20 +80,35 @@ export class OrderPickerService {
     )
   }
 
+  private getItemAmount(order, item) {
+    let province = (order.customer.shipping_address.province).trim().toUpperCase();
+    let taxRate = this.salesTaxService.getTaxRate(province);
+
+    let itemAmount = item.price * item.quantity;  
+    let tax = itemAmount * taxRate;
+    itemAmount = itemAmount + tax;
+    console.log('itemAmount to refund', itemAmount)   
+    return itemAmount.toPrecision(2);
+  }
+
   public getOrderTotals(order) {
     this.order = order;
     this.order.subtotal = this.getSubtotal();
-    this.order.discount = this.getDiscount();
-    this.order.total = this.getTotal();    
+    
+    let province = (order.customer.shipping_address.province).trim().toUpperCase();
+    let taxRate = this.salesTaxService.getTaxRate(province);
+    this.order.tax = this.order.subtotal * taxRate;
+    this.order.total = this.getTotal() + this.order.tax;  
+
     return of(this.order)
   }
 
-  public getDiscount() {
-    return this.getSubtotal() * .10;
-  }
+  // public getDiscount() {
+  //   return this.getSubtotal() * .10;
+  // }
 
   public getTotal() {
-    return this.getSubtotal() - this.getDiscount();
+    return this.getSubtotal();
   }
 
   public getSubtotal() {

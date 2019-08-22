@@ -42,7 +42,7 @@ export class OrderService {
     let taxRate = this.salesTaxService.getTaxRate(province);
 
     order.tax = order.subtotal * taxRate;
-    order.total = order.subtotal + order.tax - order.discount;
+    order.total = order.subtotal + order.tax;
     console.log('order with computed tax', order)
     return order;
   }
@@ -108,6 +108,9 @@ export class OrderService {
 
   public deleteItemFromOrder(orderId, itemId) {
     console.log('*** deleteItemFromOrder ***')
+    console.log('orderId', orderId)
+    console.log('itemId', itemId)
+    
 
     let order = this.orders.find(order => order._id == orderId);
     console.log('*** deleteItemFromOrder order ***', order)

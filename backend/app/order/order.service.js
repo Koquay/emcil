@@ -29,7 +29,7 @@ exports.placeOrder = async (newOrder) => {
 }
 
 exports.refundOrder = async (orderInfo) => {
-    await refundCard(orderInfo);
+    await refundWholeOrder(orderInfo);
     this.setOrderStatus({ orderNo: orderInfo.orderNo, status: orderInfo.status })
 }
 
@@ -57,7 +57,7 @@ const chargeCard = async (newOrder) => {
     }
 }
 
-const refundCard = async (orderInfo) => {
+const refundWholeOrder = async (orderInfo) => {
     console.log('REFUND CARD CALLED')
     try {
         const refund = await stripe.refunds.create({
@@ -68,7 +68,32 @@ const refundCard = async (orderInfo) => {
 
         return refund.id;
     } catch (error) {
-        error.message = '1. There is a problem charging the credit card.';
+        error.message = '1. There is a problem refunding the credit card.';
+        throw error;
+    }
+}
+
+const refundPartialOrder = async (orderInfo) => {
+    console.log('REFUND refundPartialOrder CALLED')
+    console.log('orderInfo.card_id', orderInfo.card_id)
+    console.log('orderInfo.amount', orderInfo.amount)
+    console.log('process.env.PROCESSING_PERCENTAGE', process.env.PROCESSING_PERCENTAGE)
+    console.log('process.env.PROCESSING_EXTRA', process.env.PROCESSING_EXTRA)
+    
+
+    let processingFee = +process.env.PROCESSING_PERCENTAGE * orderInfo.amount + +process.env.PROCESSING_EXTRA;
+    console.log('processingFee', processingFee)
+    
+    try {
+        const refund = await stripe.refunds.create({
+            charge: orderInfo.card_id,
+            amount: Math.round(orderInfo.amount - processingFee) * 100,
+        });
+
+        console.log('refund', refund)
+    } catch (error) {
+        console.log('refunPartialOrder error', error);
+        error.message = '1. There is a problem partially refunding the credit card.';
         throw error;
     }
 }
@@ -216,19 +241,30 @@ exports.getSearchedOrder = async (orderNo) => {
     }
 }
 
-exports.deleteItem = async (order, itemId) => {
+exports.deleteItem = async (orderInfo) => {
+    console.log('*********** OrderService deleteItem ************')
+    // console.log('orderInfo', orderInfo)
+    let {order, itemId, itemAmount} = orderInfo;
+    
+    // console.log('order', order)
+    console.log('order.cart_id', order.card_id)
+    console.log('itemId', itemId)
+    console.log('itemAmount', itemAmount)  
+
     try {
         const newOrder = await Order.findOneAndUpdate({ _id: order._id },
             {
                 $pull: { order_items: { _id: itemId } },
                 $set: {
                     subtotal: order.subtotal,
-                    discount: order.discount,
+                    // discount: order.discount,
                     tax: order.tax,
                     total: order.total
                 }
             },
             { new: true });
+
+        await refundPartialOrder({card_id:order.card_id, amount:itemAmount});            
 
         if (newOrder.order_items.length == 0) {
             this.deleteOrder(newOrder._id);
@@ -236,6 +272,7 @@ exports.deleteItem = async (order, itemId) => {
         }
         return newOrder;
     } catch (errorx) {
+        console.log('errorx', errorx)
         let error = new Error();
         error.message = 'Problem deleting item. Please try again or contact IT Department.';
         error.status = '500';
