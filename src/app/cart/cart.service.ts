@@ -30,15 +30,9 @@ export class CartService {
 
   public getOrder() {
     this.order.subtotal = this.getSubtotal();
-    // this.order.discount = this.getDiscount();
-    // this.order.tax = this.getTax();
     this.order.total = this.getTotal();    
     return of(this.order)
   }
-
-  // public getDiscount() {
-  //   return this.getSubtotal() * .10;
-  // }
 
   public getTotal() {
     return this.getSubtotal();

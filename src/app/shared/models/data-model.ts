@@ -72,7 +72,6 @@ export class Order {
     refund: boolean;
     refund_date: Date;
     delivery_date: Date;
-    discount: number;
     tax: number;
     subtotal: number;
     total: number;

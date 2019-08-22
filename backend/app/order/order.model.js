@@ -50,7 +50,6 @@ const OrderSchema = new Schema({
     refund: Boolean,
     refund_date: Date,
     delivery_date: Date,
-    discount: Number,
     tax: Number,
     subtotal: Number,
     total: Number,

@@ -257,7 +257,6 @@ exports.deleteItem = async (orderInfo) => {
                 $pull: { order_items: { _id: itemId } },
                 $set: {
                     subtotal: order.subtotal,
-                    // discount: order.discount,
                     tax: order.tax,
                     total: order.total
                 }
